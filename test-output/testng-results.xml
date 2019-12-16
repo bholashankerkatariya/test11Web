@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="1" total="4" passed="3" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2019-12-13T18:34:23 IST" name="Default suite" finished-at="2019-12-13T18:35:13 IST" duration-ms="49777">
+    <groups>
+    </groups>
+    <test started-at="2019-12-13T18:34:23 IST" name="Default test" finished-at="2019-12-13T18:35:13 IST" duration-ms="49777">
+      <class name="testclass.JoinLeagueTest">
+        <test-method is-config="true" signature="callbrowser()[pri:0, instance:testclass.JoinLeagueTest@7ec7ffd3]" started-at="2019-12-13T18:34:23 IST" name="callbrowser" finished-at="2019-12-13T18:34:36 IST" duration-ms="12968" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- callbrowser -->
+        <test-method signature="loginToPortal(java.lang.String, java.lang.String)[pri:1, instance:testclass.JoinLeagueTest@7ec7ffd3]" started-at="2019-12-13T18:34:36 IST" name="loginToPortal" data-provider="Login" finished-at="2019-12-13T18:34:49 IST" duration-ms="12797" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[testqa.auth@gmail.com]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Arjun@123]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginToPortal -->
+        <test-method signature="select_A_Match()[pri:2, instance:testclass.JoinLeagueTest@7ec7ffd3]" started-at="2019-12-13T18:34:49 IST" name="select_A_Match" finished-at="2019-12-13T18:34:57 IST" duration-ms="7787" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- select_A_Match -->
+        <test-method signature="Join_Private_contest()[pri:4, instance:testclass.JoinLeagueTest@7ec7ffd3]" started-at="2019-12-13T18:34:57 IST" name="Join_Private_contest" finished-at="2019-12-13T18:35:13 IST" duration-ms="16158" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Join_Private_contest -->
+      </class> <!-- testclass.JoinLeagueTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
