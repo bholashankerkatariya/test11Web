@@ -11,14 +11,19 @@ public class Browser {
 	public WebDriverWait Wait;
 
 	public void chrome() {
-
+		
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--disable-notifications");
 		System.setProperty("webdriver.chrome.driver",
 				"C:\\Users\\Bhola Shankar\\eclipse-workspace\\Myteam11Web\\Drivers\\chromedriver.exe");
 		driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
-		String baseUrl = "https://myteam11.com/fantasy-sports/landing";
+		
+			//Test environment URL
+		//String baseUrl = "https://goteam11.com/fantasy-sports/landing";
+		
+			//Live Environement URL
+		String baseUrl = "https://www.myteam11.com/fantasy-sports/landing";
 		driver.get(baseUrl);
 		Wait = new WebDriverWait(driver, 30);
 

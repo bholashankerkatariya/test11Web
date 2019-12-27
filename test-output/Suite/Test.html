@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>4/1/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>6/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Sun Nov 03 19:37:20 IST 2019</td>
+<td>Started on:</td><td>Thu Dec 26 12:40:32 IST 2019</td>
 </tr>
-<tr><td>Total time:</td><td>22 seconds (22955 ms)</td>
+<tr><td>Total time:</td><td>57 seconds (57768 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -75,64 +75,22 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='testclass.loginTest.GoToProfile()'><b>GoToProfile</b><br>Test class: testclass.loginTest</td>
-<td><div><pre>org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element &lt;img _ngcontent-c6=&quot;&quot; alt=&quot;&quot; src=&quot;assets/images/avtar_3.jpg&quot;&gt; is not clickable at point (63, 67). Other element would receive the click: &lt;div class=&quot;introjs-overlay&quot; style=&quot;top: 0px; bottom: 0px; left: 0px; right: 0px; position: fixed; opacity: 0;&quot;&gt;&lt;/div&gt;
-  (Session info: chrome=78.0.3904.70)
-Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:25:48&apos;
-System info: host: &apos;DESKTOP-DBL0MJR&apos;, ip: &apos;192.168.43.227&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;12.0.1&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 78.0.3904.70, chrome: {chromedriverVersion: 78.0.3904.70 (edb9c9f3de024..., userDataDir: C:\Users\BHOLAS~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:52666}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
-Session ID: 931df502fccc8d690eb369fd2f032ca8
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
-	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:285)
-	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:84)
-	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
-	at com.sun.proxy.$Proxy10.click(Unknown Source)
-	at testCases.Login.Go_To_profile(Login.java:74)
-	at testclass.loginTest.GoToProfile(loginTest.java:49)
+<td title='testclass.JoinLeagueTest.playerSelection()'><b>playerSelection</b><br>Test class: testclass.JoinLeagueTest</td>
+<td><div><pre>org.testng.internal.reflect.MethodMatcherException: 
+[public void testclass.JoinLeagueTest.playerSelection(java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception] has no parameters defined but was found to be using a data provider (either explicitly specified or inherited from class level annotation).
+Data provider mismatch
+Method: playerSelection([Parameter{index=0, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=1, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=2, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=3, type=java.lang.String, declaredAnnotations=[]}])
+Arguments: [(java.lang.String) ]
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
-... Removed 36 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1960253514", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1960253514'><pre>org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element &lt;img _ngcontent-c6=&quot;&quot; alt=&quot;&quot; src=&quot;assets/images/avtar_3.jpg&quot;&gt; is not clickable at point (63, 67). Other element would receive the click: &lt;div class=&quot;introjs-overlay&quot; style=&quot;top: 0px; bottom: 0px; left: 0px; right: 0px; position: fixed; opacity: 0;&quot;&gt;&lt;/div&gt;
-  (Session info: chrome=78.0.3904.70)
-Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:25:48&apos;
-System info: host: &apos;DESKTOP-DBL0MJR&apos;, ip: &apos;192.168.43.227&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;12.0.1&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 78.0.3904.70, chrome: {chromedriverVersion: 78.0.3904.70 (edb9c9f3de024..., userDataDir: C:\Users\BHOLAS~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:52666}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
-Session ID: 931df502fccc8d690eb369fd2f032ca8
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
-	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:285)
-	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:84)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
-	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
-	at com.sun.proxy.$Proxy10.click(Unknown Source)
-	at testCases.Login.Go_To_profile(Login.java:74)
-	at testclass.loginTest.GoToProfile(loginTest.java:49)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:584)
-	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:172)
-	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+... Removed 22 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1418851979", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1418851979'><pre>org.testng.internal.reflect.MethodMatcherException: 
+[public void testclass.JoinLeagueTest.playerSelection(java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception] has no parameters defined but was found to be using a data provider (either explicitly specified or inherited from class level annotation).
+Data provider mismatch
+Method: playerSelection([Parameter{index=0, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=1, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=2, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=3, type=java.lang.String, declaredAnnotations=[]}])
+Arguments: [(java.lang.String) ]
+	at org.testng.internal.reflect.DataProviderMethodMatcher.getConformingArguments(DataProviderMethodMatcher.java:43)
+	at org.testng.internal.Parameters.injectParameters(Parameters.java:925)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:34)
 	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:804)
 	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:145)
 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
@@ -155,7 +113,7 @@ Session ID: 931df502fccc8d690eb369fd2f032ca8
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
 <td>0</td>
-<td>testclass.loginTest@359f7cdf</td></tr>
+<td>testclass.JoinLeagueTest@72d1ad2e</td></tr>
 </table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
@@ -167,23 +125,33 @@ Session ID: 931df502fccc8d690eb369fd2f032ca8
 <tr>
 <td title='testclass.loginTest.Blank_Submit_Login()'><b>Blank_Submit_Login</b><br>Test class: testclass.loginTest</td>
 <td></td>
-<td>1</td>
-<td>testclass.loginTest@359f7cdf</td></tr>
+<td>0</td>
+<td>testclass.loginTest@595b007d</td></tr>
 <tr>
-<td title='testclass.loginTest.Login_With_Valid_Credentials()'><b>Login_With_Valid_Credentials</b><br>Test class: testclass.loginTest</td>
+<td title='testclass.loginTest.Login_With_Valid_Credentials()'><b>Login_With_Valid_Credentials</b><br>Test class: testclass.loginTest<br>Parameters: test12312@yopmail.com, Arjun@123</td>
+<td></td>
+<td>6</td>
+<td>testclass.loginTest@595b007d</td></tr>
+<tr>
+<td title='testclass.loginTest.Login_with_wrong_Email()'><b>Login_with_wrong_Email</b><br>Test class: testclass.loginTest<br>Parameters: test12312@yopmail.com, Arjun@123</td>
+<td></td>
+<td>0</td>
+<td>testclass.loginTest@595b007d</td></tr>
+<tr>
+<td title='testclass.loginTest.Login_with_wrong_Password()'><b>Login_with_wrong_Password</b><br>Test class: testclass.loginTest<br>Parameters: test12312@yopmail.com, Arjun@123</td>
 <td></td>
 <td>4</td>
-<td>testclass.loginTest@359f7cdf</td></tr>
+<td>testclass.loginTest@595b007d</td></tr>
 <tr>
-<td title='testclass.loginTest.Login_with_wrong_Email()'><b>Login_with_wrong_Email</b><br>Test class: testclass.loginTest</td>
+<td title='testclass.JoinLeagueTest.loginToPortal()'><b>loginToPortal</b><br>Test class: testclass.JoinLeagueTest<br>Parameters: test12312@yopmail.com, Arjun@123</td>
 <td></td>
-<td>0</td>
-<td>testclass.loginTest@359f7cdf</td></tr>
+<td>10</td>
+<td>testclass.JoinLeagueTest@72d1ad2e</td></tr>
 <tr>
-<td title='testclass.loginTest.Login_with_wrong_Password()'><b>Login_with_wrong_Password</b><br>Test class: testclass.loginTest</td>
+<td title='testclass.JoinLeagueTest.select_A_Match()'><b>select_A_Match</b><br>Test class: testclass.JoinLeagueTest</td>
 <td></td>
-<td>0</td>
-<td>testclass.loginTest@359f7cdf</td></tr>
+<td>8</td>
+<td>testclass.JoinLeagueTest@72d1ad2e</td></tr>
 </table><p>
 </body>
 </html>

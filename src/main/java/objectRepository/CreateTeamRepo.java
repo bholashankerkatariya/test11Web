@@ -193,7 +193,7 @@ public class CreateTeamRepo {
 	private WebElement TeamPreviewIcon;
 	
 // Join Team
-	@FindBy(xpath = "//div[16]//a[1]")
+	@FindBy(xpath = "//body/app-root/div[@class='full_view hight_full']/div[@class='left_view']/div[@class='blur_showing']/app-count-down/app-contest-category/div/div[@class='app_center hight_full']/div[@class='scroling_div']/div[@class='contest_listing']/div[1]/a[1]")
 	private WebElement AllContests;
 	
 	@FindBy(xpath = "//div[@class = 'contest_data_list contests']/div")
@@ -314,7 +314,14 @@ public class CreateTeamRepo {
 	
 	@FindBy(xpath = "//*[@class='introjs-button introjs-skipbutton introjs-donebutton']")
 	private WebElement DoneTutorial;
-
+	
+	@FindBy(xpath = "//a[contains(text(),'Teams')]")
+	private WebElement TeamDcrementsort;
+	
+	
+	public WebElement getTeamDcrementsort() {
+		return TeamDcrementsort;
+	}
 	
 	public WebElement getDoneTutorial() {
 		return DoneTutorial;
