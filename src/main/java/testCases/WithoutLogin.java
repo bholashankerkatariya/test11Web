@@ -11,20 +11,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import action.Action;
-import objectRepository.BeforeLogicRepository;
-import objectRepository.CreateTeamRepo;
+import objectRepository.BeforeLoginObject;
+import objectRepository.CreateTeam;
 import utils.Browser;
 
-public class WithoutLoginLogic extends Browser {
-	BeforeLogicRepository beforelogin;
+public class WithoutLogin extends Browser {
+	BeforeLoginObject beforelogin;
 	WebDriverWait Wait;
-	CreateTeamRepo ct;
+	CreateTeam ct;
 	Action action;
 
-	public WithoutLoginLogic() {
+	public WithoutLogin() {
 
-		ct = PageFactory.initElements(driver, CreateTeamRepo.class);
-		beforelogin = PageFactory.initElements(driver, BeforeLogicRepository.class);
+		ct = PageFactory.initElements(driver, CreateTeam.class);
+		beforelogin = PageFactory.initElements(driver, BeforeLoginObject.class);
 	}
 
 	public void ClickOnPlayNow() throws InterruptedException {

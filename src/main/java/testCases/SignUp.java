@@ -16,7 +16,7 @@ import objectRepository.SignUpObjectRepository;
 import utils.ApiCallForOtp;
 import utils.CSVDataReader;
 
-public class SignUpLogic {
+public class SignUp {
 
 	public WebDriver driver;
 	public WebDriverWait Wait;
@@ -24,7 +24,7 @@ public class SignUpLogic {
 	SignUpObjectRepository signupRepo;
 	Actions actions;
 
-	public SignUpLogic(WebDriver _driver, WebDriverWait _Wait) {
+	public SignUp(WebDriver _driver, WebDriverWait _Wait) {
 		driver = _driver;
 		Wait = _Wait;
 

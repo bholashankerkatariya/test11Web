@@ -2,9 +2,7 @@ package testCases;
 
 import java.util.Iterator;
 import java.util.Set;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,22 +13,19 @@ import objectRepository.LogOutRepository;
 import objectRepository.LoginRepository;
 import utils.CSVDataReader;
 
-public class LoginLogic {
+public class Login {
 
 	WebDriver driver;
 	WebDriverWait Wait;
 	LoginRepository loginRepo;
 	LogOutRepository logoutRepo;
 	Actions actions;
-	JavascriptExecutor js;
-	WebElement closeButtonList;
 
-	public LoginLogic(WebDriver _driver, WebDriverWait _Wait) {
+	public Login(WebDriver _driver, WebDriverWait _Wait) {
 		driver = _driver;
 		Wait = _Wait;
 		logoutRepo = PageFactory.initElements(driver, LogOutRepository.class);
 		loginRepo = PageFactory.initElements(driver, LoginRepository.class);
-		js = (JavascriptExecutor) driver;
 	}
 
 	@DataProvider(name = "Login")
@@ -39,7 +34,7 @@ public class LoginLogic {
 	}
 
 	public void BlankSubmitLogin() {
-		// System.out.println("in loop: "+ lg.getSigninlnk().getText());
+		//System.out.println("in loop: "+ lg.getSigninlnk().getText());
 		Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSigninlnk())).click();
 		Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSigninbtn())).click();
 		System.out.println("Enter Email / Mobile" + " Password is required");
@@ -48,7 +43,7 @@ public class LoginLogic {
 	public void Login_Invalid_Password(String Username, String Password) throws InterruptedException {
 		actions = new Actions(driver);
 		actions.moveToElement(loginRepo.getSigninbtn()).perform();
-
+		
 		loginRepo.getUsernametxt().clear();
 		loginRepo.getUsernametxt().sendKeys(Username);
 		loginRepo.getPasswordtxt().clear();
@@ -61,71 +56,32 @@ public class LoginLogic {
 	public void Login_with_wrong_Email(String Username, String Password) {
 		actions = new Actions(driver);
 		actions.moveToElement(loginRepo.getSigninbtn()).perform();
-
+		
 		loginRepo.getUsernametxt().clear();
 		loginRepo.getUsernametxt().sendKeys("myteam11@gm");
 		loginRepo.getPasswordtxt().clear();
 		loginRepo.getPasswordtxt().sendKeys(Password);
-
 		Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSubmitbtn())).click();
 		System.out.println("User Doesn't Exists");
 	}
 
 	public void Login_with_Valid_Credentials(String Username, String Password) throws InterruptedException {
 
+		actions = new Actions(driver);
+		actions.moveToElement(loginRepo.getSigninbtn()).perform();
+
+		loginRepo.getUsernametxt().clear();
+		loginRepo.getUsernametxt().sendKeys(Username);
+		loginRepo.getPasswordtxt().clear();
 		Thread.sleep(2000);
-		String URL = driver.getCurrentUrl();
-
-		if (URL.contains("landing")) {
-
-			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSigninlnk())).click();
-			Thread.sleep(2000);
-			js.executeScript("$(\".scroling_div\").scrollTop(99999999999999999999999);");
-
-			loginRepo.getUsernametxt().clear();
-			loginRepo.getUsernametxt().sendKeys(Username);
-			loginRepo.getPasswordtxt().clear();
-			loginRepo.getPasswordtxt().sendKeys(Password);
-
-			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSubmitbtn())).click();
-			Thread.sleep(4000);
-			loginRepo.getTutorialSkipButton().click();
-
-			Thread.sleep(2000);
-			
-			try {
-				while (loginRepo.getAddCloseButtonList().isDisplayed()) {
-					Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getAddCloseButtonList())).click();
-					System.out.println("Clicks on close button");
-				}
-			} catch (Exception e1) {
-
-				e1.printStackTrace();
-			}
-		}
-
-		else {
-
-			actions = new Actions(driver);
-			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSigninlnk())).click();
-			// actions.moveToElement(loginRepo.getSigninbtn()).perform();
-
-			loginRepo.getUsernametxt().clear();
-			loginRepo.getUsernametxt().sendKeys(Username);
-			loginRepo.getPasswordtxt().clear();
-			loginRepo.getPasswordtxt().sendKeys(Password);
-
-			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSubmitbtn())).click();
-			Thread.sleep(2000);
-			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
-			System.out.println("User LoggedIn Successfully");
-
-		}
+		loginRepo.getPasswordtxt().sendKeys(Password);
+		Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSubmitbtn())).click();
+		Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
+		System.out.println("User LoggedIn Successfully");
 	}
 
 	public void Go_To_profile() throws InterruptedException {
-
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		logoutRepo.getLeftPanelprfl().click();
 		Wait.until(ExpectedConditions.elementToBeClickable(logoutRepo.getMyProfile())).click();
 		Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
@@ -149,7 +105,6 @@ public class LoginLogic {
 		while (iterator.hasNext()) {
 			childWindowHandler = iterator.next();
 		}
-
 		driver.switchTo().window(childWindowHandler); // switch to popup window
 
 		loginRepo.getFacebookEmailTextBox().sendKeys("testqa.auth@gmail.com");
@@ -178,7 +133,7 @@ public class LoginLogic {
 		while (iterator.hasNext()) {
 			childWindowHandler = iterator.next();
 		}
-
+		
 		driver.switchTo().window(childWindowHandler); // switch to popup window
 
 		loginRepo.getGoogleEmailTextBox().clear();
@@ -199,11 +154,11 @@ public class LoginLogic {
 	public void logout() throws InterruptedException {
 		Thread.sleep(2000);
 		actions = new Actions(driver);
-		actions.moveToElement(logoutRepo.getLogoutbtn()).perform();
-
+		actions.moveToElement(logoutRepo.getLogoutbtn()).perform();;
+	
 		Wait.until(ExpectedConditions.elementToBeClickable(logoutRepo.getLogoutbtn())).click();
 		System.out.println("User LoggedOut Successfully");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 		driver.quit();
 	}
 

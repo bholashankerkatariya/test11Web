@@ -2,24 +2,24 @@ package testclass;
 
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import testCases.Login;
+import testCases.LoginLogic;
 import utils.Browser;
 
 public class SocialMediaLoginTest {
-	Login lgn;
+	LoginLogic lgn;
 	Browser browser;
 
 
 	public SocialMediaLoginTest() {	
 		this.browser = new Browser();	
-		lgn = new Login(this.browser.driver, this.browser.Wait);
+		lgn = new LoginLogic(this.browser.driver, this.browser.Wait);
 	}
 	
 	@BeforeTest()
 	public void callbrowser()
 	{	
 		browser.chrome();
-		lgn = new Login(browser.driver, browser.Wait);
+		lgn = new LoginLogic(browser.driver, browser.Wait);
 	}
 
 	@Test(priority = 1, enabled = true)

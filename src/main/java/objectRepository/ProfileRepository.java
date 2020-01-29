@@ -143,16 +143,16 @@ public class ProfileRepository {
 	}
 
 	
-	public WebElement getD_1H_30M_30S() {
-		return D_1H_30M_30S;
+	public WebElement getDHMSformate() {
+		return DHMSformate;
 	}
 
-	public WebElement getOne_hour_left() {
-		return One_hour_left;
+	public WebElement getHoursformat() {
+		return Hoursformat;
 	}
 
-	public WebElement getSe_3_30() {
-		return Se_3_30;
+	public WebElement getDateTimeFormat() {
+		return DateTimeFormat;
 	}
 	
 	public WebElement getUpdatePasswordsubmitBtn() {
@@ -221,10 +221,39 @@ public class ProfileRepository {
 		return VerifyEmailsUs;
 	}
 	
+	public WebElement getOldPasswrdIsRequired() {
+		return OldPasswrdIsRequired;
+	}
+	
+	public WebElement getPasswrdIsRequired() {
+		return PasswrdIsRequired;
+	}
+	
+	public WebElement getCnfrmPasswrdIsRequired() {
+		return CnfrmPasswrdIsRequired;
+	}
+	
+	public WebElement getPasswrdDoesntMatch() {
+		return PasswrdDoesntMatch;
+	}
+	
+	
+	@FindBy(xpath = "//span[contains(text(),'Password doen't match')]")
+	private WebElement PasswrdDoesntMatch;
+	
+	@FindBy(xpath = "//Span[contains(text(),'Confirm password is required.')]")
+	private WebElement CnfrmPasswrdIsRequired;
+	
+	@FindBy(xpath = "//Span[contains(text(),'Password is required.')]")
+	private WebElement PasswrdIsRequired;
+	
+	@FindBy(xpath = "//Span[contains(text(),'Old Password is required')]")
+	private WebElement OldPasswrdIsRequired;
+	
 	@FindBy(xpath = "//li[3]//a[1]")
 	private WebElement VerifyEmailsUs;
 	
-	@FindBy(xpath = "//label[contains(text(),'Male')]")
+	@FindBy(xpath = "//label[contains(text(),'Male')]") ////input[@id='gen1']
 	private WebElement Male;
 	
 	@FindBy(xpath = "//label[contains(text(),'Female')]")
@@ -338,46 +367,46 @@ public class ProfileRepository {
 	@FindBy(xpath = "//p[contains(text(),'Match Time')]")
 	public WebElement OpenMatchTimeSection;
 	
-	@FindBy(xpath = "//span[contains(text(),'1D : 1H : 30M : 30S')]")
-	public WebElement D_1H_30M_30S;
+	@FindBy(xpath = "//ul[@class='time_list']/li[1]/label/span")
+	public WebElement DHMSformate;
 	
-	@FindBy(xpath = "//span[contains(text(),'1 hour left')]")
-	public WebElement One_hour_left;
+	@FindBy(xpath = "//ul[@class='time_list']/li[2]/label/span")
+	public WebElement Hoursformat;
 	
-	@FindBy(xpath = "//ul[@class='time_list']//span[contains(text(),'12 Sep 3:30pm')]")
-	public WebElement Se_3_30;
+	@FindBy(xpath = "//ul[@class='time_list']/li[3]/label/span")
+	public WebElement DateTimeFormat;
 	
-	@FindBy(xpath = "//a[@class='btn_edit']//img")
+	@FindBy(xpath = "//a[@class='btn_edit']")
 	public WebElement EditProfileicon;
 
 	@FindBy(xpath = "//button[@class='btn rank']")
 	public WebElement SeriesRank;
 	
-	@FindBy(xpath = "//input[@class='form-control ng-touched red ng-dirty ng-invalid']") 
+	@FindBy(xpath = "//input[@formcontrolname='Name']") 
 	public WebElement EnterUserName;
 	
-	@FindBy(xpath = "//input[@class='form-control ng-dirty ng-touched red ng-invalid']")
+	@FindBy(xpath = "//input[@formcontrolname='DOB']")
 	public WebElement EnterDOB;
 	
-	@FindBy(xpath = "//div[7]//input[1]")
+	@FindBy(xpath = "//div[7]//input[1]")//input[@formcontrolname='Address']
 	public WebElement EnterAddress;
 	
 	@FindBy(xpath = "//button[@class='foot_btn']")
 	public WebElement UpdateProfileBtn;
 	
-	@FindBy(xpath = "//button[@class='btn white']")
+	@FindBy(xpath = "//button[contains(text(),'Change Password')]")
 	public WebElement ChangePassword;
 	
-	@FindBy(xpath = "//input[@class='form-control ng-touched red ng-dirty ng-invalid']")
+	@FindBy(xpath = "//input[@formcontrolname='Zip']")
 	public WebElement EnterPincode;
 	
-	@FindBy(xpath = "//div[@class='profile_form']//div[1]//input[1]")
+	@FindBy(xpath = "//input[@formcontrolname='oldPassowrd']")
 	public WebElement EnterOldpassword;
 	
-	@FindBy(xpath = "//div[2]//input[1]")
+	@FindBy(xpath = "//input[@formcontrolname='passowrd']")
 	public WebElement EnterNewpassword;
 	
-	@FindBy(xpath = "//div[3]//input[1]")
+	@FindBy(xpath = "//input[@formcontrolname='cPassowrd']")
 	public WebElement ReEnterNewpassword;
 	
 	@FindBy(xpath = "//button[@class='foot_btn']")

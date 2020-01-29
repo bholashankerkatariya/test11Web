@@ -1,14 +1,15 @@
 package testclass;
 
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import testCases.Login;
+import testCases.LoginLogic;
 import utils.Browser;
 import utils.CSVDataReader;
 
 public class loginTest {
-	Login lgn;
+	LoginLogic lgn;
 	Browser browser;
 
 
@@ -26,7 +27,7 @@ public class loginTest {
 	public void callbrowser()
 	{	
 		browser.chrome();
-		lgn = new Login(browser.driver, browser.Wait);
+		lgn = new LoginLogic(browser.driver, browser.Wait);
 	}
 
 	@Test(priority = 1, enabled = true)
@@ -54,9 +55,8 @@ public class loginTest {
 		lgn.Go_To_profile(); 
 	}
 	
-	/*
-	 * @AfterTest(enabled = true) public void Logout() throws InterruptedException {
-	 * lgn.logout(); }
-	 */	
-
+	
+	  @AfterTest() public void Logout() throws InterruptedException {
+	  lgn.logout(); 
+	  }	
 }

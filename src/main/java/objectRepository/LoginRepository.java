@@ -2,6 +2,7 @@ package objectRepository;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import java.util.List;
 
 /**
  * Created By: Bhola Shanker Katariya QA @Myteam11
@@ -51,7 +52,7 @@ public class LoginRepository {
 	@FindBy(xpath = "//*[@class='alert_box_wraper']")
 	private WebElement NotificationMessage;
 
-	@FindBy(xpath = "//*[@class='introjs-button introjs-skipbutton']")
+	@FindBy(xpath = "//a[@class='introjs-button introjs-skipbutton']")
 	private WebElement tutorialSkipButton;
 
 	@FindBy(xpath = "//*[@class='avtar menu_toggle']//img")
@@ -83,6 +84,13 @@ public class LoginRepository {
 	
 	@FindBy(xpath = "//*[@id='identifierId' and @type='email']")
 	private WebElement GoogleEmailTextBox;
+	
+	@FindBy(xpath = "//a[@class='close_line active']")
+	private WebElement AddCloseButtonList;
+	
+	public WebElement getAddCloseButtonList() {
+		return AddCloseButtonList;
+	}
 	
 	public WebElement getGoogleEmailTextBox() {
 		return GoogleEmailTextBox;

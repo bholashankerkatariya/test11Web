@@ -1,21 +1,28 @@
 package testclass;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import testCases.WithoutLoginLogic;
+import testCases.WithoutLogin;
+import utils.CSVDataReader;
 
-public class BeforeLogintest {
-	WithoutLoginLogic wl;
+public class BeforeLogin {
+	WithoutLogin wl;
 	WebDriver driver;
 	
-	BeforeLogintest(){
-	wl = new WithoutLoginLogic();
+	BeforeLogin(){
+	
+	wl = new WithoutLogin();
 	}
 	
-		
+	@DataProvider(name = "Login")
+	public  Object[][] Login() throws Exception {
+		 return CSVDataReader.DDTReader("ddt/LoginPage.csv");
+	}
+	
 	@Test(priority = 1, enabled = true )
-	public void PlayNowbtn() throws InterruptedException {
+	public void PlayNowbtn(String UserName, String Password, String Status) throws InterruptedException {
 		wl.ClickOnPlayNow();
 	}
 	

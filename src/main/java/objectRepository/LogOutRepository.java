@@ -12,7 +12,7 @@ public class LogOutRepository {
 		return leftPanelprfl;
 	}
 	
-	@FindBy(xpath = "//a[contains(text(),'My Profile')]")
+	@FindBy(xpath = "//a[contains(text(),' My Profile')]")
 	private WebElement MyProfile;
 	
 	public WebElement getMyProfile() {

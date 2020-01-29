@@ -4,20 +4,20 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import testCases.Login;
-import testCases.SignUp;
+import testCases.LoginLogic;
+import testCases.SignUpLogic;
 import utils.Browser;
 import utils.CSVDataReader;
 
 public class SignupTest {
-	Login lgn;
+	LoginLogic lgn;
 	Browser browser;
-	SignUp signup;
+	SignUpLogic signup;
 
 	
 	  public SignupTest() {
 		  this.browser = new Browser(); 
-		  signup = new SignUp(this.browser.driver, this.browser.Wait); }
+		  signup = new SignUpLogic(this.browser.driver, this.browser.Wait); }
 	 
 	
 	@DataProvider(name = "Signup")
@@ -29,7 +29,7 @@ public class SignupTest {
 	public void callbrowser()
 	{	
 		browser.chrome();
-		signup = new SignUp(browser.driver, browser.Wait);
+		signup = new SignUpLogic(browser.driver, browser.Wait);
 	}
 	
 	@Test(priority = 1, enabled = true, dataProvider = "Signup")

@@ -3,7 +3,7 @@ package objectRepository;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class BeforeLogicRepository {
+public class BeforeLoginObject {
 	
 	@FindBy(xpath = "//a[@class='btn blue_btn']")
 	public WebElement PlayNowbtn;

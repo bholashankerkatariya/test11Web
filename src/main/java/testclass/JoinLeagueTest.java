@@ -1,27 +1,24 @@
 package testclass;
 
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import testCases.JoinLeague;
-import testCases.Login;
-import testCases.createTeamLogic;
+import testCases.JoinLeagueLogic;
+import testCases.LoginLogic;
 import utils.Browser;
 import utils.CSVDataReader;
 
 public class JoinLeagueTest {
-	static Login lgn;
+	static LoginLogic lgn;
 	Browser browser;
-	JoinLeague joinleague;
-	createTeamLogic createTeam;
+	JoinLeagueLogic joinleague;
 	int count = 1;
 
 	public JoinLeagueTest() {
 		this.browser = new Browser();
 
-		lgn = new Login(browser.driver, browser.Wait);
+		lgn = new LoginLogic(browser.driver, browser.Wait);
+		joinleague = new JoinLeagueLogic(browser.driver, browser.Wait);
 
 	}
 
@@ -35,11 +32,11 @@ public class JoinLeagueTest {
 		return CSVDataReader.DDTReader("ddt/TeamSelection.csv");
 	}
 
-	@BeforeTest()
+	@BeforeTest
 	public void callbrowser() {
 		browser.chrome();
-		lgn = new Login(browser.driver, browser.Wait);
-		joinleague = new JoinLeague(browser.driver, browser.Wait);
+		lgn = new LoginLogic(browser.driver, browser.Wait);
+		joinleague = new JoinLeagueLogic(browser.driver, browser.Wait);
 	}
 
 	@Test(priority = 1, enabled = true, dataProvider = "Login")
@@ -54,20 +51,19 @@ public class JoinLeagueTest {
 
 
 	@Test(priority = 3, enabled = true, dataProvider = "teamCombination")
-	public void playerSelection(String WK, String Bat, String AR, String Bowl) throws Exception {
+	public void CreatetTeame(String WK, String Bat, String AR, String Bowl) throws Exception {
 
 		Thread.sleep(2000);
 		System.out.println("Team " + count + " : " + WK + " " + Bat + " " + AR + " " + Bowl);
-		joinleague.TeamSelection(WK, Bat, AR, Bowl);
+		joinleague.TeamSelection2(WK, Bat, AR, Bowl);
 		count++;
 
 	}
 
 	@Test(priority = 4, enabled = false)
-	public void join_A_Contest() throws Exception {
+	public void Join_First_Contest() throws Exception {
 
-		joinleague.JoinContests();
-
+		joinleague.JoinMegaContests();
 	}
 
 	@Test(priority = 5, enabled = false)
@@ -97,7 +93,17 @@ public class JoinLeagueTest {
 
 	}
 
+	@Test(priority = 9, enabled = false)
+	public void JoineLeague_Of_6_Teams() throws Exception {
+		joinleague.JoineLeague_Of_6_Teams();
+	}
 	
-	//  @AfterTest public void teardownbrowser() { browser.quitDriver(); }
+	/*
+	 * @AfterTest 
+	 * public void teardownbrowser()
+	 *  { 
+	 *  browser.quitDriver();
+	 *  }
+	 */
 	 
 }
