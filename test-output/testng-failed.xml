@@ -5,7 +5,7 @@
     <classes>
       <class name="testclass.JoinLeagueTest">
         <methods>
-          <include name="playerSelection" invocation-numbers="1 2 3 4 5 6"/>
+          <include name="Join_Mega_Contest"/>
           <include name="callbrowser"/>
         </methods>
       </class> <!-- testclass.JoinLeagueTest -->
