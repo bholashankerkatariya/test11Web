@@ -76,15 +76,10 @@ public class LoginLogic {
 		loginRepo.getUsernametxt().sendKeys("myteam11@gm");
 		loginRepo.getPasswordtxt().clear();
 		loginRepo.getPasswordtxt().sendKeys(Password);
-<<<<<<< HEAD
+
 		Thread.sleep(1000);
 		loginRepo.getSubmitbtn().click();
 		System.out.println("You are not registered with Entered email Id");
-=======
-
-		Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSubmitbtn())).click();
-		System.out.println("User Doesn't Exists");
->>>>>>> b50934f5d3cf8f3789407fc5348892633edd78c8
 	}
 
 	public void Login_with_Valid_Credentials(String Username, String Password) throws InterruptedException {
@@ -96,13 +91,9 @@ public class LoginLogic {
 			System.out.println("User going to login");
 
 			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSigninlnk())).click();
-<<<<<<< HEAD
+
 			Thread.sleep(1000);
 			js.executeScript("$(\".scroling_div\").scrollTop(9999999999999999999999);");
-=======
-			Thread.sleep(2000);
-			js.executeScript("$(\".scroling_div\").scrollTop(99999999999999999999999);");
->>>>>>> b50934f5d3cf8f3789407fc5348892633edd78c8
 
 			loginRepo.getUsernametxt().clear();
 			loginRepo.getUsernametxt().sendKeys(Username);
@@ -110,7 +101,6 @@ public class LoginLogic {
 			loginRepo.getPasswordtxt().sendKeys(Password);
 
 			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSubmitbtn())).click();
-<<<<<<< HEAD
 			
 			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
 			System.out.println("User logged in successfully");
@@ -138,37 +128,8 @@ public class LoginLogic {
 				//close add popup 
 				act.PopClose(loginRepo);		
 			}			
-		}
-=======
-			Thread.sleep(4000);
-			loginRepo.getTutorialSkipButton().click();
-
-			Thread.sleep(2000);
-			
-			//close add popup 
-			act.PopClose(loginRepo);
-
-		}
-
-		else {
-
-			actions = new Actions(driver);
-			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSigninlnk())).click();
-			// actions.moveToElement(loginRepo.getSigninbtn()).perform();
-
-			loginRepo.getUsernametxt().clear();
-			loginRepo.getUsernametxt().sendKeys(Username);
-			loginRepo.getPasswordtxt().clear();
-			loginRepo.getPasswordtxt().sendKeys(Password);
-
-			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSubmitbtn())).click();
-			Thread.sleep(2000);
-			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
-			System.out.println("User LoggedIn Successfully");
-
-		}
+		}		
 	}
->>>>>>> b50934f5d3cf8f3789407fc5348892633edd78c8
 
 	public void Go_To_profile() throws InterruptedException {
 		Thread.sleep(2000);
