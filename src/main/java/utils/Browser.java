@@ -1,5 +1,7 @@
 package utils;
 
+import java.nio.file.Paths;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,18 +13,17 @@ public class Browser {
 	public WebDriverWait Wait;
 
 	public void chrome() {
-		
+		String path = Paths.get("").toAbsolutePath().toString();
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--disable-notifications");
 		System.setProperty("webdriver.chrome.driver",
-				"C:\\Users\\Bhola Shankar\\eclipse-workspace\\Myteam11Web\\Drivers\\chromedriver.exe");
+				path+"\\Drivers\\chromedriver.exe");
 		driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
 		
-			//Test environment URL
+			
 		//String baseUrl = "https://goteam11.com/fantasy-sports/landing";
-		
-			//Live Environement URL
+	
 		String baseUrl = "https://www.myteam11.com/fantasy-sports/landing";
 		driver.get(baseUrl);
 		Wait = new WebDriverWait(driver, 30);

@@ -3,12 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testclass.JoinLeagueTest">
+      <class name="testclass.loginTest">
         <methods>
-          <include name="playerSelection" invocation-numbers="1 2 3 4 5 6"/>
+          <include name="Blank_Submit_Login"/>
           <include name="callbrowser"/>
+          <include name="Logout"/>
         </methods>
-      </class> <!-- testclass.JoinLeagueTest -->
+      </class> <!-- testclass.loginTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

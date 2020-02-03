@@ -3,7 +3,6 @@ package testCases;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,25 +12,31 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.DataProvider;
 
+import action.Action;
 import objectRepository.LogOutRepository;
 import objectRepository.LoginRepository;
 import utils.CSVDataReader;
 
-public class Login {
+public class LoginLogic {
 
 	WebDriver driver;
 	WebDriverWait Wait;
 	LoginRepository loginRepo;
 	LogOutRepository logoutRepo;
 	Actions actions;
+	
+	Action act;
+	
 	JavascriptExecutor js;
+	WebElement closeButtonList;
 
-	public Login(WebDriver _driver, WebDriverWait _Wait) {
+	public LoginLogic(WebDriver _driver, WebDriverWait _Wait) {
 		driver = _driver;
 		Wait = _Wait;
 		logoutRepo = PageFactory.initElements(driver, LogOutRepository.class);
 		loginRepo = PageFactory.initElements(driver, LoginRepository.class);
 		js = (JavascriptExecutor) driver;
+		act = new Action();
 	}
 
 	@DataProvider(name = "Login")
@@ -39,115 +44,91 @@ public class Login {
 		return CSVDataReader.DDTReader("ddt/LoginPage.csv");
 	}
 
-	public void BlankSubmitLogin() {
+	public void BlankSubmitLogin() throws InterruptedException {
+		//actions = new Actions(driver);
 		// System.out.println("in loop: "+ lg.getSigninlnk().getText());
-		Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSigninlnk())).click();
-		Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSigninbtn())).click();
+		Thread.sleep(2000);
+		loginRepo.getSigninlnk().click();
+		Thread.sleep(500);
+		loginRepo.getSigninbtn().click();
 		System.out.println("Enter Email / Mobile" + " Password is required");
+		Thread.sleep(2000);
 	}
 
 	public void Login_Invalid_Password(String Username, String Password) throws InterruptedException {
 		actions = new Actions(driver);
 		actions.moveToElement(loginRepo.getSigninbtn()).perform();
-
+		Thread.sleep(500);
 		loginRepo.getUsernametxt().clear();
 		loginRepo.getUsernametxt().sendKeys(Username);
 		loginRepo.getPasswordtxt().clear();
-		Thread.sleep(4000);
 		loginRepo.getPasswordtxt().sendKeys("test@123");
 		Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSubmitbtn())).click();
 		System.out.println("Password is Incorrect");
+		Thread.sleep(2000);
 	}
 
-	public void Login_with_wrong_Email(String Username, String Password) {
+	public void Login_with_wrong_Email(String Username, String Password) throws InterruptedException  {
 		actions = new Actions(driver);
 		actions.moveToElement(loginRepo.getSigninbtn()).perform();
-
+		Thread.sleep(500);
 		loginRepo.getUsernametxt().clear();
 		loginRepo.getUsernametxt().sendKeys("myteam11@gm");
 		loginRepo.getPasswordtxt().clear();
 		loginRepo.getPasswordtxt().sendKeys(Password);
-		
-		Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSubmitbtn())).click();
-		System.out.println("User Doesn't Exists");
+		Thread.sleep(1000);
+		loginRepo.getSubmitbtn().click();
+		System.out.println("You are not registered with Entered email Id");
 	}
 
 	public void Login_with_Valid_Credentials(String Username, String Password) throws InterruptedException {
-
+		actions = new Actions(driver);
 		Thread.sleep(2000);
-		
 		String URL = driver.getCurrentUrl();
-		System.out.println(URL);
 
 		if (URL.contains("landing")) {
+			System.out.println("User going to login");
 
 			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSigninlnk())).click();
-			Thread.sleep(2000);
-			js.executeScript("$( \".scroling_div\" ).scrollTop(9999999999999999999999);");
+			Thread.sleep(1000);
+			js.executeScript("$(\".scroling_div\").scrollTop(9999999999999999999999);");
 
 			loginRepo.getUsernametxt().clear();
 			loginRepo.getUsernametxt().sendKeys(Username);
 			loginRepo.getPasswordtxt().clear();
 			loginRepo.getPasswordtxt().sendKeys(Password);
-			
-			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSubmitbtn())).click();
-			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
 
+			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSubmitbtn())).click();
+			
+			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
+			System.out.println("User logged in successfully");
 			Thread.sleep(2000);
 			
-			java.util.List<WebElement> closeButtonList = driver.findElements(By.xpath("//*[@class='model_in']/div[@class='header_modal']"));
-			Iterator<WebElement> iterator = closeButtonList.iterator();
-			if (iterator.next() != null) {
-
-				WebElement e;
-
-				while (iterator.hasNext()) {
-					e = iterator.next();
-					if (e.getText().equals("Close")) {
-						Thread.sleep(2000);
-						e.click();
-					}
-				}
-
-			}
+			//close addpopup 
+			act.PopClose(loginRepo);
 		}
-
-		else {
-
-			actions = new Actions(driver);
-			actions.moveToElement(loginRepo.getSigninbtn()).perform();
-
-			loginRepo.getUsernametxt().clear();
-			loginRepo.getUsernametxt().sendKeys(Username);
-			loginRepo.getPasswordtxt().clear();
-			loginRepo.getPasswordtxt().sendKeys(Password);
-			
-			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSubmitbtn())).click();
+	
 			Thread.sleep(2000);
-			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
-			System.out.println("User LoggedIn Successfully");
+			String URL1 = driver.getCurrentUrl();
+			
+			if(URL1.contains("login")) {
+				
+				Thread.sleep(1000);
+				loginRepo.getUsernametxt().clear();
+				loginRepo.getUsernametxt().sendKeys(Username);
+				loginRepo.getPasswordtxt().clear();
+				loginRepo.getPasswordtxt().sendKeys(Password);
+				Thread.sleep(2000);
+				loginRepo.getSubmitbtn().click();
+				Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
+				System.out.println("User LoggedIn Successfully");
 
-			java.util.List<WebElement> closeButtonList = driver.findElements(By.xpath("//*[@class='model_in']/div[@class='header_modal']"));
-			Iterator<WebElement> iterator = closeButtonList.iterator();
-			if (iterator.next() != null) {
-
-				WebElement e;
-
-				while (iterator.hasNext()) {
-					e = iterator.next();
-					if (e.getText().equals("Close")) {
-						Thread.sleep(2000);
-						e.click();
-					}
-				}
-			}
-
+				//close add popup 
+				act.PopClose(loginRepo);		
+			}			
 		}
-
-	}
 
 	public void Go_To_profile() throws InterruptedException {
-
 		Thread.sleep(2000);
 		logoutRepo.getLeftPanelprfl().click();
 		Wait.until(ExpectedConditions.elementToBeClickable(logoutRepo.getMyProfile())).click();
@@ -155,7 +136,6 @@ public class Login {
 	}
 
 	public void Login_With_FB() throws Exception {
-
 		String parentWindowHandler = driver.getWindowHandle();
 		String childWindowHandler = null;
 
@@ -226,8 +206,9 @@ public class Login {
 
 		Wait.until(ExpectedConditions.elementToBeClickable(logoutRepo.getLogoutbtn())).click();
 		System.out.println("User LoggedOut Successfully");
-		Thread.sleep(5000);
+		Thread.sleep(4000);
 		driver.quit();
+		System.out.println("Browser closed");
 	}
 
 }
