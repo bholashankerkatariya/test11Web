@@ -17,8 +17,7 @@ public class Action {
 			js.executeScript("$(\".scroling_div\").scrollTop(99999999999999999999999999999);");
 		} 
 	}
-<<<<<<< HEAD
-	
+
 	public void PopClose(LoginRepository loginRepo) throws InterruptedException {
 		try {
 			//System.out.println(loginRepo.getAddCloseButtonList());
@@ -41,26 +40,6 @@ public class Action {
 		
 	}
 	
-=======
-	public void PopClose(LoginRepository loginRepo) throws InterruptedException {
-		try {
-			System.out.println(loginRepo.getAddCloseButtonList());
-			while (loginRepo.getAddCloseButtonList() != null) {
 
-				if (loginRepo.getAddCloseButtonList().isDisplayed()) {
-					loginRepo.getAddCloseButtonList().click();
-					System.out.println("Clicks on close button");
-					Thread.sleep(1000);
-				}
-					
-				break;
-				
-			}
-		} catch (NoSuchElementException e1) {
-
-			e1.printStackTrace();
-		}
-	}
->>>>>>> b50934f5d3cf8f3789407fc5348892633edd78c8
 }
 
