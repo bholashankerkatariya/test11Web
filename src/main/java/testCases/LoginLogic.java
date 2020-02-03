@@ -127,8 +127,7 @@ public class LoginLogic {
 
 				//close add popup 
 				act.PopClose(loginRepo);		
-			}			
-		}		
+			}				
 	}
 
 	public void Go_To_profile() throws InterruptedException {
