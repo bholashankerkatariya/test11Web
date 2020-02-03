@@ -2,6 +2,7 @@
 <testng-results ignored="6" total="9" passed="3" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
+<<<<<<< HEAD
   <suite started-at="2020-02-03T15:56:09 IST" name="Default suite" finished-at="2020-02-03T15:56:55 IST" duration-ms="46389">
     <groups>
     </groups>
@@ -12,6 +13,18 @@
           </reporter-output>
         </test-method> <!-- callbrowser -->
         <test-method signature="loginToPortal(java.lang.String, java.lang.String)[pri:1, instance:testclass.JoinLeagueTest@4550bb58]" started-at="2020-02-03T15:56:23 IST" name="loginToPortal" data-provider="Login" finished-at="2020-02-03T15:56:33 IST" duration-ms="10292" status="PASS">
+=======
+  <suite started-at="2020-02-01T16:54:09 IST" name="Default suite" finished-at="2020-02-01T16:55:00 IST" duration-ms="51239">
+    <groups>
+    </groups>
+    <test started-at="2020-02-01T16:54:09 IST" name="Default test" finished-at="2020-02-01T16:55:00 IST" duration-ms="51239">
+      <class name="testclass.JoinLeagueTest">
+        <test-method is-config="true" signature="callbrowser()[pri:0, instance:testclass.JoinLeagueTest@6adbc9d]" started-at="2020-02-01T16:54:09 IST" name="callbrowser" finished-at="2020-02-01T16:54:24 IST" duration-ms="15061" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- callbrowser -->
+        <test-method signature="loginToPortal(java.lang.String, java.lang.String)[pri:1, instance:testclass.JoinLeagueTest@6adbc9d]" started-at="2020-02-01T16:54:24 IST" name="loginToPortal" data-provider="Login" finished-at="2020-02-01T16:54:36 IST" duration-ms="11974" status="PASS">
+>>>>>>> b50934f5d3cf8f3789407fc5348892633edd78c8
           <params>
             <param index="0">
               <value>
@@ -27,11 +40,19 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginToPortal -->
+<<<<<<< HEAD
         <test-method signature="select_A_Match()[pri:2, instance:testclass.JoinLeagueTest@4550bb58]" started-at="2020-02-03T15:56:33 IST" name="select_A_Match" finished-at="2020-02-03T15:56:37 IST" duration-ms="4147" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- select_A_Match -->
         <test-method signature="join_league_Less_Than_100Member()[pri:7, instance:testclass.JoinLeagueTest@4550bb58]" started-at="2020-02-03T15:56:37 IST" name="join_league_Less_Than_100Member" finished-at="2020-02-03T15:56:55 IST" duration-ms="17851" status="PASS">
+=======
+        <test-method signature="select_A_Match()[pri:2, instance:testclass.JoinLeagueTest@6adbc9d]" started-at="2020-02-01T16:54:36 IST" name="select_A_Match" finished-at="2020-02-01T16:54:41 IST" duration-ms="5082" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- select_A_Match -->
+        <test-method signature="join_league_Less_Than_100Member()[pri:7, instance:testclass.JoinLeagueTest@6adbc9d]" started-at="2020-02-01T16:54:41 IST" name="join_league_Less_Than_100Member" finished-at="2020-02-01T16:55:00 IST" duration-ms="19054" status="PASS">
+>>>>>>> b50934f5d3cf8f3789407fc5348892633edd78c8
           <reporter-output>
           </reporter-output>
         </test-method> <!-- join_league_Less_Than_100Member -->

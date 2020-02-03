@@ -5,7 +5,11 @@
     <classes>
       <class name="testclass.loginTest">
         <methods>
+<<<<<<< HEAD
           <include name="Blank_Submit_Login"/>
+=======
+          <include name="Join_Mega_Contest"/>
+>>>>>>> b50934f5d3cf8f3789407fc5348892633edd78c8
           <include name="callbrowser"/>
           <include name="Logout"/>
         </methods>

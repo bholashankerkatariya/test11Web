@@ -53,9 +53,17 @@ public class loginTest {
 	public void GoToProfile() throws InterruptedException {
 		lgn.Go_To_profile();
 	}
+<<<<<<< HEAD
 
 	@AfterTest(enabled = false)
 	public void Logout() throws InterruptedException {
 		lgn.logout();
 	}
+=======
+	
+	
+	  @AfterTest() public void Logout() throws InterruptedException {
+	  lgn.logout(); 
+	  }	
+>>>>>>> b50934f5d3cf8f3789407fc5348892633edd78c8
 }
