@@ -558,10 +558,6 @@ public class JoinLeagueLogic {
 					if (disableTeams) {
 						i++;
 						continue;
-<<<<<<< HEAD
-=======
-
->>>>>>> b50934f5d3cf8f3789407fc5348892633edd78c8
 					}
 
 					Teamlist.get(i).click();
@@ -882,7 +878,6 @@ public class JoinLeagueLogic {
 			TotalContests = crtTeam.getTotalContests();
 			LeagueSize = crtTeam.getLeagueSize();
 			LeagueAmount = crtTeam.getLeagueAmount();
-<<<<<<< HEAD
 
 			for (int j = 0; j < LeagueSize.size(); j++) {
 				String arSplit = LeagueSize.get(j).getText();
@@ -900,25 +895,6 @@ public class JoinLeagueLogic {
 				System.out.println(tempLeagueAmount <= 100 && Integer.parseInt(teamcount[0]) > 6
 						&& crtTeam.getM().isDisplayed() && !crtTeam.getC().isDisplayed());
 
-=======
-
-			for (int j = 0; j < LeagueSize.size(); j++) {
-				String arSplit = LeagueSize.get(j).getText();
-				String teamcount[] = arSplit.split(" ");
-				
-				String arrSplit = LeagueAmount.get(j).getText();
-				int tempLeagueAmount = 0;
-				if(!arrSplit.contains("Free")) {
-				String Leagueamnt[] = arrSplit.split("₹");
-				tempLeagueAmount = Integer.parseInt(Leagueamnt[1]);
-				}
-
-				System.out.println("Team Count: " + teamcount[0] + ", League amount: " + tempLeagueAmount);
-
-				System.out.println(tempLeagueAmount <= 100 && Integer.parseInt(teamcount[0]) > 6
-						&& crtTeam.getM().isDisplayed() && !crtTeam.getC().isDisplayed());
-
->>>>>>> b50934f5d3cf8f3789407fc5348892633edd78c8
 				if (tempLeagueAmount <=100 && Integer.parseInt(teamcount[0]) > 6
 						&& crtTeam.getM().isDisplayed() && !crtTeam.getC().isDisplayed()) {
 
