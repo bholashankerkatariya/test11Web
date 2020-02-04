@@ -15,7 +15,6 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import action.Action;
 import objectRepository.CreateTeamRepo;
 import objectRepository.LogOutRepository;
 import objectRepository.LoginRepository;
@@ -32,7 +31,7 @@ public class JoinLeagueLogic {
 	JavascriptExecutor js;
 	boolean getDoneTutorial = true;
 
-	Action action;
+	Actions action;
 	LogOutRepository logoutRepo;
 	LoginRepository loginRepo;
 	LoginLogic loginLogic;
@@ -116,6 +115,7 @@ public class JoinLeagueLogic {
 			crtTeam.getLeagueJoinNowbtn().click();
 
 			Thread.sleep(2000);
+
 			Teamlist = crtTeam.getTeamlist();
 
 			for (i = 0; i < Teamlist.size();) {
@@ -249,7 +249,6 @@ public class JoinLeagueLogic {
 				}
 			}
 		}
-
 		Thread.sleep(2000);
 		crtTeam.getbackButton().click();
 	}
@@ -384,13 +383,16 @@ public class JoinLeagueLogic {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+			Thread.sleep(2000);
+			LeagueSize = crtTeam.getLeagueSize();
+			LeagueAmount = crtTeam.getLeagueAmount();			
 
 			Thread.sleep(2000);
 			LeagueSize = crtTeam.getLeagueSize();
 			LeagueAmount = crtTeam.getLeagueAmount();
 
 			for (int j = 0; j < LeagueSize.size();) {
-
 				String arSplit = LeagueSize.get(j).getText();
 				String teamcount[] = arSplit.split(" ");
 
@@ -417,11 +419,10 @@ public class JoinLeagueLogic {
 			}
 
 		}
-
 		Thread.sleep(2000);
 		Teamlist = crtTeam.getTeamlist();
 
-		for (i = 0; i < Teamlist.size();) {
+		for (int i = 0; i < Teamlist.size();) {
 
 			try {
 
@@ -477,7 +478,6 @@ public class JoinLeagueLogic {
 			}
 
 		}
-
 		Thread.sleep(2000);
 		crtTeam.getbackButton().click();
 	}
@@ -511,6 +511,7 @@ public class JoinLeagueLogic {
 				}
 				// Scroll up
 				// js.executeScript("$(\".scroling_div\").scrollTop(0);");
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -534,6 +535,7 @@ public class JoinLeagueLogic {
 				if (Integer.parseInt(Leagueamnt[1]) < 100 && Integer.parseInt(teamcount[0]) < 100
 						&& crtTeam.getM().isDisplayed()) {
 
+
 					System.out.println("in if loop");
 
 					WebElement element = LeagueAmount.get(j);
@@ -546,8 +548,8 @@ public class JoinLeagueLogic {
 					break;
 
 				}
+			}				
 
-			}
 
 			Teamlist = crtTeam.getTeamlist();
 
@@ -790,6 +792,7 @@ public class JoinLeagueLogic {
 		} // FOR LOOP CLOSE
 	} // fUNCTION close
 
+
 	// Joine the league of 6 teams only
 	public void JoineLeague_Of_6_Teams() throws Exception {
 
@@ -801,7 +804,7 @@ public class JoinLeagueLogic {
 			Thread.sleep(2000);
 			crtTeam.getAllContests().click();
 			Thread.sleep(2000);
-			crtTeam.getDoneTutorial().click();
+			crtTeam.getDoneTutorial().click();			
 
 			try {
 
@@ -831,16 +834,15 @@ public class JoinLeagueLogic {
 					String Leagueamnt[] = arrSplit.split("₹");
 					tempLeagueAmount = Integer.parseInt(Leagueamnt[1]);
 				}
+		
 
 				System.out.println("Team Count: " + teamcount[0] + ", League amount: " + tempLeagueAmount);
 
 				System.out.println(tempLeagueAmount <= 100 && Integer.parseInt(teamcount[0]) > 6
-						&& crtTeam.getM().isDisplayed() && !crtTeam.getC().isDisplayed());
+						&& crtTeam.getM().isDisplayed() && !crtTeam.getC().isDisplayed());						
 
-				if (tempLeagueAmount <= 100 && Integer.parseInt(teamcount[0]) > 6 && crtTeam.getM().isDisplayed()
-						&& !crtTeam.getC().isDisplayed()) {
-
-					// System.out.println(LeagueAmount.get(LeagueAmountposition).getText());
+				if (tempLeagueAmount <=100 && Integer.parseInt(teamcount[0]) > 6
+						&& crtTeam.getM().isDisplayed() && !crtTeam.getC().isDisplayed()) {
 
 					WebElement element = LeagueAmount.get(LeagueAmountposition);
 
@@ -917,163 +919,26 @@ public class JoinLeagueLogic {
 
 	}
 
-	@SuppressWarnings("null")
-	public void TeamSelection2(String WK, String Bat, String AR, String Bowl) throws Exception {
-
-		boolean getDoneTutorial = true;
-
-		if (getDoneTutorial) {
-
-			Thread.sleep(2000);
-			crtTeam.getDoneTutorial().click();
-
-			Thread.sleep(1000);
-			String st = crtTeam.getCreateNewTeamBtn().getText();
-			System.out.println(st);
-
-			List<WebElement> teamCount = null;
-			switch (st) {
-			// when 0 teams
-			case "CREATE NEW TEAM": {
-				teamCount = crtTeam.getTeamCount();
-
-				if (teamCount.size() >= 10) {
-					driver.navigate().back();
-					Thread.sleep(2000);
-					Matchcount++;
-					Select_The_Match();
-				}
-
-				Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getCreateNewTeamBtn())).click();
-				count++;
-
-				boolean skip = true;
-				if (skip) {
-					Thread.sleep(2000);
-					crtTeam.getTutorialSkipButton().click();
-					temp1 = alreadyCreateTeam + count;
-					System.out.println("Already Created team :" + alreadyCreateTeam + "Newly Created Team :" + count
-							+ "Total team Created: " + temp1);
-					if (temp1 >= 10) {
-						Thread.sleep(2000);
-						driver.navigate().back();
-
-						Matchcount++;
-						count = 0;
-						System.out.println(
-								"10 Teams created in previous Match, Now switch to another match: " + Matchcount);
-						Select_The_Match();
-					}
-					break;
-				}
-				skip = false;
-			}
-
-			// when team > 0
-			case "My Teams": {
-				System.out.println("Already Created Team = " + crtTeam.getTeamCount());
-				alreadyCreateTeam = crtTeam.getTeamCount().size();
-				if (alreadyCreateTeam == 10) {
-					Thread.sleep(3000);
-					driver.navigate().back();
-					Matchcount++;
-					alreadyCreateTeam = 0;
-					Select_The_Match();
-				} else {
-					Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getCreateNewTeamBtn())).click();
-					teamCount = crtTeam.getTeamCount();
-					if (teamCount.size() >= 10) {
-						driver.navigate().back();
-						Thread.sleep(2000);
-						Matchcount++;
-						Select_The_Match();
-					}
-
-					Thread.sleep(2000);
-					crtTeam.getCreateNewTeamBtn().click();
-
-					count++;
-				}
-
-				break;
-			}
-
-			// already 10 teams.
-			default:
-				if (teamCount.size() >= 10) {
-					System.out.println("Default team count : " + teamCount.size());
-					if (crtTeam.getCreateNewTeamBtn().isDisplayed() != true) {
-						driver.navigate().back();
-						Matchcount++;
-						Select_The_Match();
-					}
-				}
-			}
-
-			Thread.sleep(1000);
-			crtTeam.getS_Bysort().click();
-
-			List<WebElement> playerType = crtTeam.getplayerType();
-
-			List<WebElement> list1 = new ArrayList<WebElement>();
-
-			Thread.sleep(1000);
-			list1 = crtTeam.getMemberSelectionList();
-			SelectPlayerInList(WK, list1, playerType.get(0), playerType.get(1));
-
-			Thread.sleep(1000);
-			list1 = crtTeam.getMemberSelectionList();
-			SelectPlayerInList(Bat, list1, playerType.get(1), playerType.get(2));
-
-			Thread.sleep(1000);
-			list1 = crtTeam.getMemberSelectionList();
-			SelectPlayerInList(AR, list1, playerType.get(2), playerType.get(3));
-
-			Thread.sleep(1000);
-			if (playerType.get(3).isSelected()) {
-				crtTeam.getCR_sort().click();
-
-			}
-
-			list1 = crtTeam.getMemberSelectionList();
-			SelectPlayerInList(Bowl, list1, playerType.get(3), crtTeam.getNextbtn());
-			playing11 = crtTeam.getselectedplaying11members().getText();
-
-			Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getNextbtn())).click();
-			captainSelection();
-
-			System.out.println("wrong selection");
-		}
-		getDoneTutorial = false;
-	}
-
-	static String playing11;
-	static int memberSelected;
-	static int actualSize = 0;
-	static int i = 0;
-
+		
 	static void SelectPlayerInList2(String size, List<WebElement> PlayerListdemo, WebElement first, WebElement second)
 			throws Exception {
 
-		PlayerList = PlayerListdemo;
-		if (first.isEnabled()) {
-			actualSize = Integer.parseInt(size);
-			playing11 = crtTeam.getselectedplaying11members().getText();
-			System.out.println("Playing 11 : " + playing11);
-			Thread.sleep(2000);
-			String[] temp = playing11.split("(?=/)");
-			// System.out.println(temp[0]);
-
-			memberSelected = Integer.parseInt(temp[0].trim());
-
-			selectPlayerRandomIndex();
-
-			System.out.println("selected player count " + memberSelected);
-
-			if (second != null)
-				second.click();
-			hs.clear();
-		}
+		/*
+		 * PlayerList = PlayerListdemo; if (first.isEnabled()) { actualSize =
+		 * Integer.parseInt(size); playing11 =
+		 * crtTeam.getselectedplaying11members().getText();
+		 * System.out.println("Playing 11 : " + playing11); Thread.sleep(2000); String[]
+		 * temp = playing11.split("(?=/)"); // System.out.println(temp[0]);
+		 * 
+		 * memberSelected = Integer.parseInt(temp[0].trim());
+		 * 
+		 * selectPlayerRandomIndex();
+		 * 
+		 * System.out.println("selected player count " + memberSelected);
+		 * 
+		 * if (second != null) second.click(); hs.clear(); }
+		 */
+				
 	}
 
 	static void randomSelection() {
@@ -1084,68 +949,44 @@ public class JoinLeagueLogic {
 	static ArrayList<Integer> list = new ArrayList<Integer>();
 
 	static void selectPlayerRandomIndex() {
-		genrateList();
-		for (int cPos = 0; cPos < list.size(); cPos++) {
-			int index = list.get(cPos);
-			System.out.print("index " + index);
-
-			WebElement element = PlayerList.get(index);
-			int tempPos = -1;
-			try {
-				WebElement e = element.findElement(By.xpath("//div[@class='row disabled']"));
-				if (!e.isDisplayed()) {
-					System.out.println(" not displayed ");
-					Wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-					i++;
-					actualSize--;
-				} else {
-					System.out.println("fade displayed at " + index);
-
-					for (int a = 0; a < list.size(); a++)
-						System.out.print(" " + list.get(a));
-					int no = -1;
-					boolean flag = true;
-					while (flag) {
-						no = (int) (Math.random() * PlayerList.size());
-						if (!list.contains(no)) {
-							list.add(no);
-							list.remove(cPos);
-							tempPos = no;
-							System.out.println("break value " + tempPos);
-							flag = false;
-							break;
-						}
-					}
-					for (int a = 0; a < list.size(); a++)
-						System.out.print(" " + list.get(a));
-					System.out.println("new pos  " + tempPos);
-					cPos--;
-				}
-			} catch (Exception e) {
-				System.out.println(" not faded ");
-				Wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-				i++;
-				actualSize--;
-			}
-		}
+		/*
+		 * genrateList(); for (int cPos = 0; cPos < list.size(); cPos++) { int index =
+		 * list.get(cPos); System.out.print("index " + index);
+		 * 
+		 * WebElement element = PlayerList.get(index); int tempPos = -1; try {
+		 * WebElement e = element.findElement(By.xpath("//div[@class='row disabled']"));
+		 * if (!e.isDisplayed()) { System.out.println(" not displayed ");
+		 * Wait.until(ExpectedConditions.elementToBeClickable(element)).click(); i++;
+		 * actualSize--;
+		 * 
+		 * } else { System.out.println("fade displayed at " + index);
+		 * 
+		 * for (int a = 0; a < list.size(); a++) System.out.print(" " + list.get(a));
+		 * int no = -1; boolean flag = true; while (flag) { no = (int) (Math.random() *
+		 * PlayerList.size()); if (!list.contains(no)) { list.add(no);
+		 * list.remove(cPos); tempPos = no; System.out.println("break value " +
+		 * tempPos); flag = false; break; } } for (int a = 0; a < list.size(); a++)
+		 * System.out.print(" " + list.get(a)); System.out.println("new pos  " +
+		 * tempPos); cPos--; } } catch (Exception e) {
+		 * System.out.println(" not faded ");
+		 * Wait.until(ExpectedConditions.elementToBeClickable(element)).click(); i++;
+		 * actualSize--; } }
+		 */
 	}
 
 	static void genrateList() {
 
-		while (list.size() < actualSize) {
-			int num = (int) (Math.random() * PlayerList.size());
-			if (!list.contains(num))
-				list.add(num);
-		}
-
+		/*
+		 * while (list.size() < actualSize) { int num = (int) (Math.random() *
+		 * PlayerList.size()); if (!list.contains(num)) list.add(num); }
+		 */
 	}
 
 	static void generateRandomIndex() {
-		int size = PlayerList.size();
-		while (hs.size() < actualSize) {
-			int num = (int) (Math.random() * size);
-			hs.add(num);
-		}
+		/*
+		 * int size = PlayerList.size(); while (hs.size() < actualSize) { int num =
+		 * (int) (Math.random() * size); hs.add(num); }
+		 */
 	}
 
 	public void captainSelection() throws Exception {
@@ -1183,5 +1024,4 @@ public class JoinLeagueLogic {
 
 		Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getSaveteambtn())).click();
 	} // function close
-
 }

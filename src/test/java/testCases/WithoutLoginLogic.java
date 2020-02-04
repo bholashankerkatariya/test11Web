@@ -9,8 +9,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import action.Action;
 import objectRepository.BeforeLogicRepository;
 import objectRepository.CreateTeamRepo;
 import utils.Browser;
@@ -19,7 +17,7 @@ public class WithoutLoginLogic extends Browser {
 	BeforeLogicRepository beforelogin;
 	WebDriverWait Wait;
 	CreateTeamRepo ct;
-	Action action;
+	Actions action;
 
 	public WithoutLoginLogic() {
 

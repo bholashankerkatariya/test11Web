@@ -53,10 +53,11 @@ public class JoinLeagueTest {
 	@Test(priority = 3, enabled = false, dataProvider = "teamCombination")
 	public void CreatetTeam(String WK, String Bat, String AR, String Bowl) throws Exception {
 
-		Thread.sleep(2000);
-		System.out.println("Team " + count + " : " + WK + " " + Bat + " " + AR + " " + Bowl);
-		joinleague.TeamSelection2(WK, Bat, AR, Bowl);
-		count++;
+		/*
+		 * Thread.sleep(2000); System.out.println("Team " + count + " : " + WK + " " +
+		 * Bat + " " + AR + " " + Bowl); joinleague.TeamSelection2(WK, Bat, AR, Bowl);
+		 * count++;
+		 */
 
 	}
 

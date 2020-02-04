@@ -6,21 +6,20 @@ import org.openqa.selenium.NoSuchElementException;
 import objectRepository.LoginRepository;
 
 public class Action {
-	
+
 	JavascriptExecutor js = null;
-	
-	public void ScrollDown(){
-		int i; 
-		  
-		for (i = 0; i < 15; i++)  
-		{ 
+
+	public void ScrollDown() {
+		int i;
+
+		for (i = 0; i < 15; i++) {
 			js.executeScript("$(\".scroling_div\").scrollTop(99999999999999999999999999999);");
-		} 
+		}
 	}
-	
+
 	public void PopClose(LoginRepository loginRepo) throws InterruptedException {
 		try {
-			//System.out.println(loginRepo.getAddCloseButtonList());
+			// System.out.println(loginRepo.getAddCloseButtonList());
 			while (loginRepo.getAddCloseButtonList() != null) {
 
 				if (loginRepo.getAddCloseButtonList().isDisplayed()) {
@@ -28,17 +27,16 @@ public class Action {
 					System.out.println("Clicks on close button");
 					Thread.sleep(1000);
 				}
-					
-				break;			
+
+				break;
 			}
 		} catch (NoSuchElementException e1) {
 			e1.printStackTrace();
 		}
 	}
-	
-	public void SkipTutorial() {
-		
-	}
-	
-}
 
+	public void SkipTutorial() {
+
+	}
+
+}

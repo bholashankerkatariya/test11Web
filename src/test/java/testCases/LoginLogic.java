@@ -11,11 +11,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.DataProvider;
-
 import action.Action;
 import objectRepository.LogOutRepository;
 import objectRepository.LoginRepository;
 import utils.CSVDataReader;
+
+
 
 public class LoginLogic {
 
@@ -45,11 +46,11 @@ public class LoginLogic {
 	}
 
 	public void BlankSubmitLogin() throws InterruptedException {
-		//actions = new Actions(driver);
+		actions = new Actions(driver);
 		// System.out.println("in loop: "+ lg.getSigninlnk().getText());
 		Thread.sleep(2000);
 		loginRepo.getSigninlnk().click();
-		Thread.sleep(500);
+		Thread.sleep(2000);
 		loginRepo.getSigninbtn().click();
 		System.out.println("Enter Email / Mobile" + " Password is required");
 		Thread.sleep(2000);
@@ -76,6 +77,7 @@ public class LoginLogic {
 		loginRepo.getUsernametxt().sendKeys("myteam11@gm");
 		loginRepo.getPasswordtxt().clear();
 		loginRepo.getPasswordtxt().sendKeys(Password);
+
 		Thread.sleep(1000);
 		loginRepo.getSubmitbtn().click();
 		System.out.println("You are not registered with Entered email Id");
@@ -90,6 +92,7 @@ public class LoginLogic {
 			System.out.println("User going to login");
 
 			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSigninlnk())).click();
+
 			Thread.sleep(1000);
 			js.executeScript("$(\".scroling_div\").scrollTop(9999999999999999999999);");
 
@@ -98,11 +101,10 @@ public class LoginLogic {
 			loginRepo.getPasswordtxt().clear();
 			loginRepo.getPasswordtxt().sendKeys(Password);
 
-			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSubmitbtn())).click();
-			
+			Thread.sleep(2000);
+			loginRepo.getSubmitbtn().click();
 			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
 			System.out.println("User logged in successfully");
-			Thread.sleep(2000);
 			
 			//close addpopup 
 			act.PopClose(loginRepo);
@@ -125,8 +127,9 @@ public class LoginLogic {
 
 				//close add popup 
 				act.PopClose(loginRepo);		
-			}			
-		}
+			}				
+	}
+
 
 	public void Go_To_profile() throws InterruptedException {
 		Thread.sleep(2000);
@@ -212,3 +215,4 @@ public class LoginLogic {
 	}
 
 }
+
