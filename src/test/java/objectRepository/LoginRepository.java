@@ -2,7 +2,6 @@ package objectRepository;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import java.util.List;
 
 /**
  * Created By: Bhola Shanker Katariya QA @Myteam11

@@ -1,8 +1,8 @@
 package testCases;
 
-import java.util.Iterator;
-import java.util.Set;
-
+import action.Action;
+import objectRepository.LogOutRepository;
+import objectRepository.LoginRepository;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,11 +11,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.DataProvider;
-import action.Action;
-import objectRepository.LogOutRepository;
-import objectRepository.LoginRepository;
 import utils.CSVDataReader;
 
+import java.util.Iterator;
+import java.util.Set;
 
 
 public class LoginLogic {
@@ -24,8 +23,7 @@ public class LoginLogic {
 	WebDriverWait Wait;
 	LoginRepository loginRepo;
 	LogOutRepository logoutRepo;
-	Actions actions;
-	
+	Actions actions;	
 	Action act;
 	
 	JavascriptExecutor js;
@@ -34,6 +32,7 @@ public class LoginLogic {
 	public LoginLogic(WebDriver _driver, WebDriverWait _Wait) {
 		driver = _driver;
 		Wait = _Wait;
+		
 		logoutRepo = PageFactory.initElements(driver, LogOutRepository.class);
 		loginRepo = PageFactory.initElements(driver, LoginRepository.class);
 		js = (JavascriptExecutor) driver;
@@ -46,8 +45,9 @@ public class LoginLogic {
 	}
 
 	public void BlankSubmitLogin() throws InterruptedException {
-		actions = new Actions(driver);
+		//actions = new Actions(driver);
 		// System.out.println("in loop: "+ lg.getSigninlnk().getText());
+	
 		Thread.sleep(2000);
 		loginRepo.getSigninlnk().click();
 		Thread.sleep(2000);
@@ -136,6 +136,7 @@ public class LoginLogic {
 		logoutRepo.getLeftPanelprfl().click();
 		Wait.until(ExpectedConditions.elementToBeClickable(logoutRepo.getMyProfile())).click();
 		Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
+		Thread.sleep(2000);
 	}
 
 	public void Login_With_FB() throws Exception {
@@ -213,6 +214,12 @@ public class LoginLogic {
 		driver.quit();
 		System.out.println("Browser closed");
 	}
+	
+	public void teardown() {
+		driver.quit();
+	}
+
+	
 
 }
 

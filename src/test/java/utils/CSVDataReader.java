@@ -1,10 +1,11 @@
 package utils;
 
+import com.opencsv.CSVReader;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Iterator;
 import java.util.List;
-import com.opencsv.CSVReader;
 
 public class CSVDataReader {
 

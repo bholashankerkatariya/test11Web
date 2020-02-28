@@ -1,9 +1,8 @@
 package action;
 
+import objectRepository.LoginRepository;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
-
-import objectRepository.LoginRepository;
 
 public class Action {
 

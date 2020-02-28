@@ -5,67 +5,67 @@ import java.nio.file.Paths;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Browser {
 
-	public WebDriver driver;
+	public WebDriver driver = null;
 	public WebDriverWait Wait;
+	String live = "https://myteam11.com/fantasy-sports/landing";;
+	String goteam = "https://goteam11.com/fantasy-sports/landing";
+	String n2 = "http://m.myteam11.in/fantasy-sports/landing";
 
-	public void chrome() {
-		String path = Paths.get("").toAbsolutePath().toString();
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--disable-notifications");
-		System.setProperty("webdriver.chrome.driver",
-				path+"\\Drivers\\chromedriver.exe");
-		driver = new ChromeDriver(options);
-		driver.manage().window().maximize();
-		
-			
-		//String baseUrl = "https://goteam11.com/fantasy-sports/landing";
 	
-		String baseUrl = "https://www.myteam11.com/fantasy-sports/landing";
-		driver.get(baseUrl);
-		Wait = new WebDriverWait(driver, 30);
+	public Browser(String browser) {
 
+		if (browser.equalsIgnoreCase("chrome")) {
+
+			//System.out.println("chrome browser is opening");
+			String path = Paths.get("").toAbsolutePath().toString();
+
+			//disable notification popup
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--disable-notifications");
+
+			System.setProperty("webdriver.chrome.driver",
+					"C:\\Users\\Bhola Shankar\\eclipse-workspace\\Myteam11Web\\Drivers\\chromedriver_79.exe");
+			driver = new ChromeDriver(options);
+			driver.manage().window().maximize();
+
+			driver.get(live);
+			Wait = new WebDriverWait(driver, 30);
+
+		}
+
+		 if (browser.equalsIgnoreCase("firefox")) {
+			System.out.println("Firefox browser is opening"); 
+			// String path =
+			System.setProperty("webdriver.gecko.driver",
+					"C:\\Users\\Bhola Shankar\\eclipse-workspace\\Myteam11Web\\Drivers\\geckodriver.exe");
+			driver = new FirefoxDriver();
+			driver.get(live);
+			driver.manage().window().maximize();
+			Wait = new WebDriverWait(driver, 30);
+			String alertMessage = driver.switchTo().alert().getText();
+			System.out.println(alertMessage);
+
+		}
+
+		if (browser.equalsIgnoreCase("Edge")) {
+			System.out.println("Microsoft Edge browser"); // String path =
+			System.setProperty("webdriver.edge.driver",
+					"C:\\Users\\Bhola Shankar\\eclipse-workspace\\Myteam11Web\\Drivers\\msedgedriver80.361.50.exe");
+			driver = new EdgeDriver();
+			driver.get(live);
+			driver.manage().window().maximize();
+			Wait = new WebDriverWait(driver, 30);
+
+		}
 	}
 
-	/*
-	 * public void Firefoxe() {
-	 * 
-	 * // declaration and instantiation of objects/variables
-	 * 
-	 * System.setProperty("webdriver.gecko.driver",
-	 * "C:\\Users\\Bhola Shankar\\eclipse-workspace\\Myteam11Web\\Drivers\\geckodriver.exe"
-	 * );
-	 * 
-	 * driver = new FirefoxDriver();
-	 * 
-	 * String baseUrl = "https://myteam11.com/fantasy-sports/landing";
-	 * driver.get(baseUrl); driver.manage().window().maximize(); try {
-	 * Thread.sleep(3000); } catch (InterruptedException e) { e.printStackTrace(); }
-	 * String alertMessage = driver.switchTo().alert().getText();
-	 * System.out.println(alertMessage);
-	 * 
-	 * }
+	 /* public WebDriver getDriver() { if (driver == null) { driver = new
+	  ChromeDriver(); return driver; } else return driver; }
 	 */
-	public WebDriver getDriver() {
-		if (driver == null) {
-			driver = new ChromeDriver();
-			return driver;
-		} else {
-			return driver;
-		}
-	}
-
-	public void quitDriver() {
-		try {
-
-			driver.quit();
-		} catch (Exception e) {
-
-		}
-		driver = null;
-	}
-
 }

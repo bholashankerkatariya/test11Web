@@ -2,9 +2,13 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
   <test thread-count="5" name="Test">
-    <classes>
-      <class name="testclass.loginTest"/>
-      <class name="testclass.JoinLeagueTest"/>   
-    </classes>
-  </test> <!-- Test -->
-</suite> <!-- Suite -->
+  <parameter name="browsers" value="chrome" />
+		<classes>
+			<class name="testclass.JoinLeagueTest">
+				<!-- <methods>
+					<include name="callbrowser" />
+				</methods> -->
+			</class>				
+		</classes>  
+  </test>
+</suite> 

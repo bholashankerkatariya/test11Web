@@ -1,1027 +1,1027 @@
 package testCases;
 
-import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
+import objectRepository.CreateTeamRepo;
+import objectRepository.LogOutRepository;
+import objectRepository.LoginRepository;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import objectRepository.CreateTeamRepo;
-import objectRepository.LogOutRepository;
-import objectRepository.LoginRepository;
+import org.testng.Assert;
+
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 
 public class JoinLeagueLogic {
 
-	int leagueCount = 0;
-	int Matchcount = 0;
-	int LeagueAmountposition = 0;
-	int Leagueamnt = 0;
-	WebDriver driver;
-	static WebDriverWait Wait;
-	static CreateTeamRepo crtTeam;
-	JavascriptExecutor js;
-	boolean getDoneTutorial = true;
-
-	Actions action;
-	LogOutRepository logoutRepo;
-	LoginRepository loginRepo;
-	LoginLogic loginLogic;
-	Actions actions;
-	boolean skip = true;
-	boolean done = true;
-	int temp = 0;
-	int temp1 = 0;
-	int count = 0;
-	int alreadyCreateTeam = 0;
-	List<WebElement> matchList = null;
-	static List<WebElement> PlayerList = null;
-	java.util.List<WebElement> Teamlist;
-	java.util.List<WebElement> LeagueSize;
-	java.util.List<WebElement> LeagueAmount;
-	List<WebElement> TotalContests;
-	java.util.List<WebElement> LeagueList;
+    int leagueCount = 0;
+    int Matchcount = 0;
+    int LeagueAmountposition = 0;
+    int Leagueamnt = 0;
+    WebDriver driver;
+    static WebDriverWait Wait;
+    static CreateTeamRepo crtTeam;
+    JavascriptExecutor js;
+    boolean getDoneTutorial = true;
+
+    Actions action;
+    LogOutRepository logoutRepo;
+    LoginRepository loginRepo;
+    LoginLogic loginLogic;
+    Actions actions;
+    boolean skip = true;
+    boolean done = true;
+    int temp = 0;
+    int temp1 = 0;
+    int count = 0;
+    int alreadyCreateTeam = 0;
+    List<WebElement> matchList = null;
+    static List<WebElement> PlayerList = null;
+    java.util.List<WebElement> Teamlist;
+    java.util.List<WebElement> LeagueSize;
+    java.util.List<WebElement> LeagueAmount;
+    List<WebElement> TotalContests;
+    java.util.List<WebElement> LeagueList;
+    java.util.List<WebElement> C;
+    java.util.List<WebElement> M;
+    java.util.List<WebElement> S;
+
 
-	public JoinLeagueLogic(WebDriver _driver, WebDriverWait _Wait) {
-		driver = _driver;
-		Wait = _Wait;
+    public JoinLeagueLogic(WebDriver _driver, WebDriverWait _Wait) {
+        driver = _driver;
+        Wait = _Wait;
 
-		js = (JavascriptExecutor) driver;
+        js = (JavascriptExecutor) driver;
+
+        crtTeam = PageFactory.initElements(driver, CreateTeamRepo.class);
+        loginRepo = PageFactory.initElements(driver, LoginRepository.class);
+
+        logoutRepo = PageFactory.initElements(driver, LogOutRepository.class);
+    }
 
-		crtTeam = PageFactory.initElements(driver, CreateTeamRepo.class);
-		loginRepo = PageFactory.initElements(driver, LoginRepository.class);
+    public void Select_The_Match() throws Exception {
 
-		logoutRepo = PageFactory.initElements(driver, LogOutRepository.class);
-	}
+        Thread.sleep(2000);
+        List<WebElement> matchlist = null;
 
-	public void Select_The_Match() throws Exception {
+        try {
+            for (int i = 0; i < 15; i++) {
+                js.executeScript("$(\".scroling_div\").scrollTop(99999999999999999999999999999);");
+            }
 
-		Thread.sleep(2000);
-		List<WebElement> matchlist = null;
+            // Scroll up
+            js.executeScript("$(\".scroling_div\").scrollTop(0);");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-		try {
-			for (int i = 0; i < 15; i++) {
-				js.executeScript("$(\".scroling_div\").scrollTop(99999999999999999999999999999);");
-			}
+        matchlist = crtTeam.getMatchList();
 
-			// Scroll up
-			js.executeScript("$(\".scroling_div\").scrollTop(0);");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        System.out.println("Number of matches:" + matchlist.size());
 
-		matchlist = crtTeam.getMatchList();
+        Thread.sleep(1000);
+        matchlist.get(Matchcount).click();
 
-		System.out.println("Number of matches:" + matchlist.size());
+        /*
+         * if (getDoneTutorial) {
+         *
+         * Thread.sleep(4000); crtTeam.getDoneTutorial().click();
+         *
+         * }
+         */
 
-		Thread.sleep(1000);
-		matchlist.get(Matchcount).click();
+        // getDoneTutorial = false;
 
-		/*
-		 * if (getDoneTutorial) {
-		 * 
-		 * Thread.sleep(4000); crtTeam.getDoneTutorial().click();
-		 * 
-		 * }
-		 */
+    }
 
-		// getDoneTutorial = false;
+    // Join first contest of match
+    public void JoinMegaContests() throws Exception {
+        int i;
+        Teamlist = null;
 
-	}
+        if (getDoneTutorial) {
+            Thread.sleep(2000);
+            crtTeam.getDoneTutorial().click();
 
-	// Join first contest of match
-	public void JoinMegaContests() throws Exception {
+            Thread.sleep(1000);
+            LeagueList = crtTeam.getLeagueList();
+            LeagueList.get(leagueCount).click();
 
-		int i;
-		Teamlist = null;
+            Thread.sleep(2000);
+            crtTeam.getLeagueJoinNowbtn().click();
 
-		if (getDoneTutorial) {
-			Thread.sleep(2000);
-			crtTeam.getDoneTutorial().click();
+            Thread.sleep(2000);
 
-			Thread.sleep(1000);
-			LeagueList = crtTeam.getLeagueList();
-			LeagueList.get(leagueCount).click();
+            Teamlist = crtTeam.getTeamlist();
 
-			Thread.sleep(2000);
-			crtTeam.getLeagueJoinNowbtn().click();
+            for (i = 0; i < Teamlist.size(); ) {
 
-			Thread.sleep(2000);
+                try {
 
-			Teamlist = crtTeam.getTeamlist();
+                    boolean disableTeams = Teamlist.get(i).getAttribute("class").equals("disable_5");
 
-			for (i = 0; i < Teamlist.size();) {
+                    if (disableTeams) {
+                        i++;
+                        continue;
+                    }
 
-				try {
+                    Teamlist.get(i).click();
 
-					boolean disableTeams = Teamlist.get(i).getAttribute("class").equals("disable_5");
+                    boolean joinTeam;
 
-					if (disableTeams) {
-						i++;
-						continue;
-					}
+                    try {
+                        joinTeam = crtTeam.getJoinContest().isDisplayed();
+                        if (joinTeam) {
 
-					Teamlist.get(i).click();
+                            Thread.sleep(2000);
+                            crtTeam.getJoinContest().click();
+                        }
 
-					boolean joinTeam;
+                    } catch (Exception e1) {
+                        boolean joinTeam2 = crtTeam.getJoinContestofTeamlistbtn().isDisplayed();
+                        if (joinTeam2) {
 
-					try {
-						joinTeam = crtTeam.getJoinContest().isDisplayed();
-						if (joinTeam) {
+                            crtTeam.getJoinContestofTeamlistbtn().click();
+                        }
+                        e1.printStackTrace();
+                    }
 
-							Thread.sleep(2000);
-							crtTeam.getJoinContest().click();
-						}
+                    Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getLeagueJoinNowbtnPopup())).click();
 
-					} catch (Exception e1) {
-						boolean joinTeam2 = crtTeam.getJoinContestofTeamlistbtn().isDisplayed();
-						if (joinTeam2) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) {
+                        e.getStackTrace();
+                    }
 
-							crtTeam.getJoinContestofTeamlistbtn().click();
-						}
-						e1.printStackTrace();
-					}
+                    Teamlist = crtTeam.getTeamlist();
+                    i++;
 
-					Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getLeagueJoinNowbtnPopup())).click();
+                    // System.out.println("Teamlist: " + Teamlist.get(i).getAttribute("class"));
 
-					try {
-						Thread.sleep(1000);
-					} catch (Exception e) {
-						e.getStackTrace();
-					}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-					Teamlist = crtTeam.getTeamlist();
-					i++;
+                if (i == Teamlist.size()) {
+                    break;
 
-					// System.out.println("Teamlist: " + Teamlist.get(i).getAttribute("class"));
+                }
 
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+            }
 
-				if (i == Teamlist.size()) {
-					break;
+            getDoneTutorial = false;
+        } else {
 
-				}
+            Thread.sleep(2000);
 
-			}
+            java.util.List<WebElement> LeagueList = crtTeam.getLeagueList();
+            LeagueList.get(leagueCount).click();
 
-			getDoneTutorial = false;
-		}
+            Thread.sleep(2000);
 
-		else {
+            crtTeam.getLeagueJoinNowbtn().click();
 
-			Thread.sleep(2000);
+            Thread.sleep(4000);
 
-			java.util.List<WebElement> LeagueList = crtTeam.getLeagueList();
-			LeagueList.get(leagueCount).click();
+            Teamlist = crtTeam.getTeamlist();
 
-			Thread.sleep(2000);
+            for (i = 0; i < Teamlist.size(); ) {
 
-			//
-			crtTeam.getLeagueJoinNowbtn().click();
+                // System.out.println("Teamlist: " + Teamlist.get(i).getAttribute("class"));
+                // System.out.println("Teamlist: " +
+                // Teamlist.get(i).getAttribute("class").equals("disable_5"));
 
-			Thread.sleep(4000);
+                try {
 
-			Teamlist = crtTeam.getTeamlist();
+                    boolean disableTeams = Teamlist.get(i).getAttribute("class").equals("disable_5");
 
-			for (i = 0; i < Teamlist.size();) {
+                    if (disableTeams) {
+                        i++;
+                        continue;
+                    }
 
-				// System.out.println("Teamlist: " + Teamlist.get(i).getAttribute("class"));
-				// System.out.println("Teamlist: " +
-				// Teamlist.get(i).getAttribute("class").equals("disable_5"));
+                    Teamlist.get(i).click();
 
-				try {
+                    boolean joinTeam;
 
-					boolean disableTeams = Teamlist.get(i).getAttribute("class").equals("disable_5");
+                    try {
+                        joinTeam = crtTeam.getJoinContest().isDisplayed();
+                        if (joinTeam) {
 
-					if (disableTeams) {
-						i++;
-						continue;
+                            Thread.sleep(3000);
+                            crtTeam.getJoinContest().click();
+                        }
 
-					}
+                    } catch (Exception e1) {
+                        boolean joinTeam2 = crtTeam.getJoinContestofTeamlistbtn().isDisplayed();
+                        if (joinTeam2) {
 
-					Teamlist.get(i).click();
+                            crtTeam.getJoinContestofTeamlistbtn().click();
+                        }
+                        e1.printStackTrace();
+                    }
 
-					boolean joinTeam;
+                    Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getLeagueJoinNowbtnPopup())).click();
 
-					try {
-						joinTeam = crtTeam.getJoinContest().isDisplayed();
-						if (joinTeam) {
+                    Thread.sleep(1000);
 
-							Thread.sleep(3000);
-							crtTeam.getJoinContest().click();
-						}
+                    Teamlist = crtTeam.getTeamlist();
+                    i++;
 
-					} catch (Exception e1) {
-						boolean joinTeam2 = crtTeam.getJoinContestofTeamlistbtn().isDisplayed();
-						if (joinTeam2) {
+                    // System.out.println("Teamlist: " + Teamlist.get(i).getAttribute("class"));
 
-							crtTeam.getJoinContestofTeamlistbtn().click();
-						}
-						e1.printStackTrace();
-					}
+                } catch (Exception e) {
 
-					Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getLeagueJoinNowbtnPopup())).click();
+                    e.printStackTrace();
+                }
 
-					Thread.sleep(1000);
+                if (i == Teamlist.size()) {
+                    break;
+                }
+            }
+        }
+        Thread.sleep(2000);
+        crtTeam.getbackButton().click();
+    }
 
-					Teamlist = crtTeam.getTeamlist();
-					i++;
+    // Create and Join Private Contest
+    public void JoinPrivateContest() throws InterruptedException {
 
-					// System.out.println("Teamlist: " + Teamlist.get(i).getAttribute("class"));
+        if (getDoneTutorial) {
+            Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getDoneTutorial())).click();
+            Thread.sleep(2000);
+            crtTeam.getCreatePrivateContestbtn().click();
 
-				} catch (Exception e) {
+            Thread.sleep(2000);
+            crtTeam.getEnterYourcontestName().clear();
+            crtTeam.getEnterYourcontestName().sendKeys("Testing purpose");
 
-					e.printStackTrace();
-				}
+            crtTeam.getEnterWinningAmount().clear();
+            crtTeam.getEnterWinningAmount().sendKeys("20");
 
-				if (i == Teamlist.size()) {
-					break;
-				}
-			}
-		}
-		Thread.sleep(2000);
-		crtTeam.getbackButton().click();
-	}
+            crtTeam.getenterContestSize().clear();
+            crtTeam.getenterContestSize().sendKeys("3");
 
-	// Create and Join Private Contest
-	public void JoinPrivateContest() throws InterruptedException {
+            crtTeam.getAllowMultipleteamJointoggle().click();
+            Thread.sleep(1000);
+            crtTeam.getJoin_Now_buttonpvtContest().click();
 
-		int i;
-		java.util.List<WebElement> Teamlist = null;
+            Thread.sleep(4000);
+            SelectTeams_JoineLeague();
 
-		if (getDoneTutorial)
+        }
+    }
 
-		{
+    // join league more than 100 members league and amount less than 100
+    public void joinleagueMoreThan100Member() throws Exception {
 
-			Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getDoneTutorial())).click();
-			Thread.sleep(2000);
-			Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getCreatePrivateContestbtn())).click();
-			Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getEnterYourcontestName()))
-					.sendKeys("Testing purpose");
-			crtTeam.getEnterWinningAmount().sendKeys("20");
-			crtTeam.getenterContestSize().sendKeys("3");
-			crtTeam.getAllowMultipleteamJointoggle().click();
-			crtTeam.getJoin_Now_buttonpvtContest().click();
+        if (getDoneTutorial) {
+            Thread.sleep(2000);
+            crtTeam.getDoneTutorial().click();
 
-			Thread.sleep(4000);
+            Thread.sleep(2000);
+            crtTeam.getAllContests().click();
 
-			Teamlist = crtTeam.getTeamlist();
+            Thread.sleep(2000);
+            crtTeam.getDoneTutorial().click();
 
-			for (i = 0; i < Teamlist.size();) {
+            try {
+                for (int i = 0; i < 30; i++) {
+                    js.executeScript("$(\".scroling_div\").scrollTop(999999999999999999999999999999);");
+                }
+                // Scroll up
+                Thread.sleep(500);
+                js.executeScript("$(\".scroling_div\").scrollTop(0);");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-				try {
+            Thread.sleep(2000);
+            LeagueSize = crtTeam.getLeagueSize();
+            LeagueAmount = crtTeam.getLeagueAmount();
+            M = crtTeam.getM();
 
-					boolean disableTeams = Teamlist.get(i).getAttribute("class").equals("disable_5");
+            Thread.sleep(2000);
+            LeagueSize = crtTeam.getLeagueSize();
+            LeagueAmount = crtTeam.getLeagueAmount();
 
-					if (disableTeams) {
-						i++;
-						continue;
+            for (int j = 0; j < LeagueSize.size(); ) {
+                String arSplit = LeagueSize.get(j).getText();
+                String teamcount[] = arSplit.split(" ");
 
-					}
+                String arrSplit = LeagueAmount.get(j).getText();
+                int tempLeagueAmount = 0;
+                if (!arrSplit.contains("Free")) {
+                    String Leagueamnt[] = arrSplit.split("₹");
+                    tempLeagueAmount = Integer.parseInt(Leagueamnt[1]);
+                }
 
-					Teamlist.get(i).click();
+                // System.out.println("Team Count: " + teamcount[0] + ", League amount: " + tempLeagueAmount);
+                System.out.println(tempLeagueAmount < 100 && Integer.parseInt(teamcount[0]) > 100
+                &&  M.get(j).isDisplayed());
 
-					boolean joinTeam;
+                if (tempLeagueAmount < 100 && Integer.parseInt(teamcount[0]) > 100
+                        && M.get(j).isDisplayed()) {
 
-					try {
+                    //System.out.println(LeagueAmount.get(LeagueAmountposition).getText());
 
-						joinTeam = crtTeam.getJoinContest().isDisplayed();
-						if (joinTeam) {
+                    WebElement element = LeagueAmount.get(j);
 
-							crtTeam.getJoinContest().click();
-						}
+                    Actions actions = new Actions(driver);
+                    actions.moveToElement(element).perform();
 
-					} catch (Exception e1) {
-						boolean joinTeam2 = crtTeam.getJoinContestofTeamlistbtn().isDisplayed();
+                    Thread.sleep(2000);
+                    element.click();
+                    break;
+                }
 
-						if (joinTeam2) {
+            }
 
-							crtTeam.getJoinContestofTeamlistbtn().click();
-						}
+        }
+        Thread.sleep(2000);
+        Teamlist = crtTeam.getTeamlist();
 
-						e1.printStackTrace();
-					}
+        for (int i = 0; i < Teamlist.size(); ) {
 
-					Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getLeagueJoinNowbtnPopup())).click();
+            try {
 
-					Thread.sleep(3000);
+                boolean disableTeams = Teamlist.get(i).getAttribute("class").equals("disable_5");
 
-					FileWriter Csvwriter;
+                if (disableTeams) {
+                    i++;
+                    continue;
+                }
 
-					try {
+                Teamlist.get(i).click();
 
-						String PvtContestCode = crtTeam.getGetCodeofPvtContest().getText();
+                boolean joinTeam;
 
-						Thread.sleep(2000);
-						String path = "ddt/privateContestcode.csv";
+                try {
+                    joinTeam = crtTeam.getJoinContest().isDisplayed();
+                    if (joinTeam) {
 
-						Csvwriter = new FileWriter(path);
+                        Thread.sleep(2000);
+                        crtTeam.getJoinContest().click();
+                    }
 
-						Csvwriter.write(PvtContestCode);
-						Csvwriter.append("\n");
+                } catch (Exception e1) {
+                    boolean joinTeam2 = crtTeam.getJoinContestofTeamlistbtn().isDisplayed();
+                    if (joinTeam2) {
 
-						Csvwriter.close();
+                        crtTeam.getJoinContestofTeamlistbtn().click();
+                    }
+                    e1.printStackTrace();
+                }
 
-					} catch (Exception e) {
+                Thread.sleep(1000);
+                crtTeam.getLeagueJoinNowbtnPopup().click();
 
-						e.printStackTrace();
-					}
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                    e.getStackTrace();
+                }
 
-					crtTeam.getClosepvtcontestPopup().click();
+                Teamlist = crtTeam.getTeamlist();
+                i++;
 
-					Teamlist = driver.findElements(By.xpath("//ul[@class='teams_list']/li"));
-					i++;
+                // System.out.println("Teamlist: " + Teamlist.get(i).getAttribute("class"));
 
-				} catch (Exception e) {
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-					e.printStackTrace();
-				}
+            if (i == Teamlist.size()) {
+                break;
 
-				if (i == Teamlist.size()) {
+            }
 
-					break;
+        }
+        Thread.sleep(2000);
+        crtTeam.getbackButton().click();
+        System.out.println("100 member league joined");
+    }
 
-				}
+    // join league Less than 100 members league and amount less than 100
+    public void joinleagueLessThan100Members() throws InterruptedException {
 
-			}
+        int i;
+        Teamlist = null;
 
-		}
-	}
+        if (getDoneTutorial) {
 
-	// join league more than 100 members league and amount less than 100
-	public void joinleagueMoreThan100Member() throws Exception {
+            try {
+                Thread.sleep(2000);
+                crtTeam.getDoneTutorial().click();
 
-		if (getDoneTutorial)
+                Thread.sleep(2000);
+                crtTeam.getAllContests().click();
 
-		{
-			Thread.sleep(2000);
-			crtTeam.getDoneTutorial().click();
+                Thread.sleep(2000);
+                crtTeam.getDoneTutorial().click();
+                Thread.sleep(2000);
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
 
-			Thread.sleep(2000);
-			crtTeam.getAllContests().click();
+            try {
 
-			Thread.sleep(2000);
-			crtTeam.getDoneTutorial().click();
+                for (int j = 0; j < 32; j++) {
+                    js.executeScript("$(\".scroling_div\").scrollTop(99999999999999999999999999999);");
+                }
 
-			try {
-				for (int i = 0; i < 30; i++) {
-					js.executeScript("$(\".scroling_div\").scrollTop(999999999999999999999999999999);");
-				}
-				// Scroll up
-				Thread.sleep(500);
-				js.executeScript("$(\".scroling_div\").scrollTop(0);");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			Thread.sleep(2000);
-			LeagueSize = crtTeam.getLeagueSize();
-			LeagueAmount = crtTeam.getLeagueAmount();			
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-			Thread.sleep(2000);
-			LeagueSize = crtTeam.getLeagueSize();
-			LeagueAmount = crtTeam.getLeagueAmount();
+            LeagueSize = crtTeam.getLeagueSize();
+            LeagueAmount = crtTeam.getLeagueAmount();
+            M = crtTeam.getM();
 
-			for (int j = 0; j < LeagueSize.size();) {
-				String arSplit = LeagueSize.get(j).getText();
-				String teamcount[] = arSplit.split(" ");
+            for (int j = 0; j < LeagueSize.size(); j++) {
+                String arSplit = LeagueSize.get(j).getText();
+                String teamcount[] = arSplit.split(" ");
 
-				String arrSplit = LeagueAmount.get(j).getText();
-				String Leagueamnt[] = arrSplit.split("₹");
+                String arrSplit = LeagueAmount.get(j).getText();
+                int tempLeagueAmount = 0;
+                if (!arrSplit.contains("Free")) {
+                    String Leagueamnt[] = arrSplit.split("₹");
+                    tempLeagueAmount = Integer.parseInt(Leagueamnt[1]);
+                }
 
-				System.out.println("Team Count: " + teamcount[0] + ", League amount: " + Leagueamnt[1]);
-				System.out.println(Integer.parseInt(Leagueamnt[1]) < 100 && Integer.parseInt(teamcount[0]) > 100
-						&& crtTeam.getM().isDisplayed());
 
-				if (Integer.parseInt(Leagueamnt[1]) < 100 && Integer.parseInt(teamcount[0]) > 100
-						&& crtTeam.getM().isDisplayed()) {
+                // league size and league amount
+                System.out.println("Team Count: " + teamcount[0] + ", League amount: " + tempLeagueAmount);
+                // logic to find exact result
+                System.out.println(tempLeagueAmount < 100 && Integer.parseInt(teamcount[0]) < 100 && M.get(j).isDisplayed());
 
-					System.out.println(LeagueAmount.get(LeagueAmountposition).getText());
+                if (tempLeagueAmount < 100 && Integer.parseInt(teamcount[0]) < 100
+                        && M.get(j).isDisplayed()) {
 
-					WebElement element = LeagueAmount.get(LeagueAmountposition);
+                    WebElement element = LeagueAmount.get(j);
+                    Actions actions = new Actions(driver);
+                    actions.moveToElement(element).perform();
 
-					((JavascriptExecutor) driver).executeScript("$('.scroling_div').scrollTop(0);", element);
+                    Thread.sleep(2000);
+                    element.click();
+                    break;
 
-					LeagueAmount.get(LeagueAmountposition).click();
-				}
+                }
+            }
 
-				break;
-			}
+            Teamlist = crtTeam.getTeamlist();
 
-		}
-		Thread.sleep(2000);
-		Teamlist = crtTeam.getTeamlist();
+            for (i = 0; i < Teamlist.size(); ) {
 
-		for (int i = 0; i < Teamlist.size();) {
+                try {
 
-			try {
+                    boolean disableTeams = Teamlist.get(i).getAttribute("class").equals("disable_5");
 
-				boolean disableTeams = Teamlist.get(i).getAttribute("class").equals("disable_5");
+                    if (disableTeams) {
+                        i++;
+                        continue;
+                    }
 
-				if (disableTeams) {
-					i++;
-					continue;
-				}
+                    Teamlist.get(i).click();
 
-				Teamlist.get(i).click();
+                    boolean joinTeam;
 
-				boolean joinTeam;
+                    try {
+                        joinTeam = crtTeam.getJoinContest().isDisplayed();
+                        if (joinTeam) {
 
-				try {
-					joinTeam = crtTeam.getJoinContest().isDisplayed();
-					if (joinTeam) {
+                            Thread.sleep(3000);
+                            crtTeam.getJoinContest().click();
+                        }
 
-						Thread.sleep(2000);
-						crtTeam.getJoinContest().click();
-					}
+                    } catch (Exception e1) {
+                        boolean joinTeam2 = crtTeam.getJoinContestofTeamlistbtn().isDisplayed();
+                        if (joinTeam2) {
 
-				} catch (Exception e1) {
-					boolean joinTeam2 = crtTeam.getJoinContestofTeamlistbtn().isDisplayed();
-					if (joinTeam2) {
+                            crtTeam.getJoinContestofTeamlistbtn().click();
+                        }
+                        e1.printStackTrace();
+                    }
 
-						crtTeam.getJoinContestofTeamlistbtn().click();
-					}
-					e1.printStackTrace();
-				}
+                    Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getLeagueJoinNowbtnPopup())).click();
 
-				Thread.sleep(1000);
-				crtTeam.getLeagueJoinNowbtnPopup().click();
+                    Thread.sleep(1000);
 
-				try {
-					Thread.sleep(1000);
-				} catch (Exception e) {
-					e.getStackTrace();
-				}
+                    Teamlist = crtTeam.getTeamlist();
+                    i++;
 
-				Teamlist = crtTeam.getTeamlist();
-				i++;
+                    // System.out.println("Teamlist: " + Teamlist.get(i).getAttribute("class"));
 
-				// System.out.println("Teamlist: " + Teamlist.get(i).getAttribute("class"));
+                } catch (Exception e) {
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+                    e.printStackTrace();
+                }
 
-			if (i == Teamlist.size()) {
-				break;
+                if (i == Teamlist.size()) {
+                    break;
+                }
 
-			}
+            }
+            Thread.sleep(2000);
+            crtTeam.getbackButton().click();
+        }
 
-		}
-		Thread.sleep(2000);
-		crtTeam.getbackButton().click();
-	}
+    }
 
-	// join league Less than 100 members league and amount less than 100
-	public void joinleagueLessThan100Members() throws InterruptedException {
+    // join league 2 members league and amount less than 100 (Head2Head)
+    public void joinleague2Members() throws InterruptedException {
 
-		int i;
-		Teamlist = null;
+        int i;
+        java.util.List<WebElement> Teamlist = null;
 
-		if (getDoneTutorial) {
+        if (getDoneTutorial) {
 
-			try {
-				Thread.sleep(2000);
-				crtTeam.getDoneTutorial().click();
+            Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getDoneTutorial())).click();
+            Thread.sleep(3000);
 
-				Thread.sleep(2000);
-				crtTeam.getAllContests().click();
+            crtTeam.getAllContests().click();
 
-				Thread.sleep(2000);
-				crtTeam.getDoneTutorial().click();
-				Thread.sleep(2000);
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
+            Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getDoneTutorial())).click();
+            Thread.sleep(1000);
+            crtTeam.getSortByEntryFee().click();
+            Thread.sleep(1000);
 
-			try {
+            try {
+                // WebElement element = LeagueAmount.get(LeagueAmountposition);
+                for (int j = 0; j < 32; j++) {
+                    ((JavascriptExecutor) driver)
+                            .executeScript("$('.scroling_div').scrollTop(9999999999999999999999999999);");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-				for (int j = 0; j < 32; j++) {
-					js.executeScript("$(\".scroling_div\").scrollTop(99999999999999999999999999999);");
-				}
-				// Scroll up
-				// js.executeScript("$(\".scroling_div\").scrollTop(0);");
+            LeagueSize = crtTeam.getLeagueSize();
+            LeagueAmount = crtTeam.getLeagueAmount();
+            S = crtTeam.getS();
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+            for (int j = 0; j < LeagueSize.size(); j++) {
+                String arSplit = LeagueSize.get(j).getText();
+                String teamcount[] = arSplit.split(" ");
 
-			LeagueSize = crtTeam.getLeagueSize();
-			LeagueAmount = crtTeam.getLeagueAmount();
+                String arrSplit = LeagueAmount.get(j).getText();
+                int tempLeagueAmount = 0;
+                if (!arrSplit.contains("Free")) {
+                    String Leagueamnt[] = arrSplit.split("₹");
+                    tempLeagueAmount = Integer.parseInt(Leagueamnt[1]);
+                }
 
-			for (int j = 0; j < LeagueSize.size(); j++) {
-				String arSplit = LeagueSize.get(j).getText();
-				String teamcount[] = arSplit.split(" ");
+                System.out.println("Team Count: " + teamcount[0] + ", League amount: " + tempLeagueAmount);
+                System.out.println(tempLeagueAmount < 100 && Integer.parseInt(teamcount[0]) <= 2);
 
-				String arrSplit = LeagueAmount.get(j).getText();
-				String Leagueamnt[] = arrSplit.split("₹");
+                if (tempLeagueAmount < 100 && Integer.parseInt(teamcount[0]) <= 2 && S.get(j).isDisplayed()) {
 
-				// league size and league amount
-				System.out.println("Team Count: " + teamcount[0] + ", League amount: " + Leagueamnt[1]);
-				// logic to find exact result
-				System.out.println(Integer.parseInt(Leagueamnt[1]) < 100 && Integer.parseInt(teamcount[0]) < 100
-						&& crtTeam.getM().isDisplayed());
+                    //System.out.println(LeagueAmount.get(LeagueAmountposition).getText());
+                    WebElement element = LeagueAmount.get(j);
 
-				if (Integer.parseInt(Leagueamnt[1]) < 100 && Integer.parseInt(teamcount[0]) < 100
-						&& crtTeam.getM().isDisplayed()) {
+                    Actions actions = new Actions(driver);
+                    actions.moveToElement(element).perform();
 
+                    Thread.sleep(2000);
+                    element.click();
 
-					System.out.println("in if loop");
+                    break;
+                }
+            }
+            Thread.sleep(1000);
 
-					WebElement element = LeagueAmount.get(j);
-				
-					Actions actions = new Actions(driver);
-					actions.moveToElement(element).perform();
-					
-					Thread.sleep(2000);
-					element.click();
-					break;
+            //Get team list
+            Teamlist = null;
 
-				}
-			}				
+            Teamlist = crtTeam.getTeamlist();
 
+            for (i = 0; i < Teamlist.size(); ) {
 
-			Teamlist = crtTeam.getTeamlist();
+                try {
 
-			for (i = 0; i < Teamlist.size();) {
+                    boolean disableTeams = Teamlist.get(i).getAttribute("class").equals("disable_5");
 
-				try {
+                    if (disableTeams) {
+                        i++;
+                        continue;
+                    }
 
-					boolean disableTeams = Teamlist.get(i).getAttribute("class").equals("disable_5");
+                    Teamlist.get(i).click();
 
-					if (disableTeams) {
-						i++;
-						continue;
-					}
+                    boolean joinTeam;
 
-					Teamlist.get(i).click();
+                    try {
 
-					boolean joinTeam;
+                        joinTeam = crtTeam.getJoinContest().isDisplayed();
+                        if (joinTeam) {
+                            crtTeam.getJoinContest().click();
+                        }
 
-					try {
-						joinTeam = crtTeam.getJoinContest().isDisplayed();
-						if (joinTeam) {
+                    } catch (Exception e1) {
+                        boolean joinTeam2 = crtTeam.getJoinContestofTeamlistbtn().isDisplayed();
 
-							Thread.sleep(3000);
-							crtTeam.getJoinContest().click();
-						}
+                        if (joinTeam2) {
 
-					} catch (Exception e1) {
-						boolean joinTeam2 = crtTeam.getJoinContestofTeamlistbtn().isDisplayed();
-						if (joinTeam2) {
+                            crtTeam.getJoinContestofTeamlistbtn().click();
+                        }
 
-							crtTeam.getJoinContestofTeamlistbtn().click();
-						}
-						e1.printStackTrace();
-					}
+                        e1.printStackTrace();
+                    }
 
-					Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getLeagueJoinNowbtnPopup())).click();
+                    Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getLeagueJoinNowbtnPopup())).click();
+                    Thread.sleep(3000);
 
-					Thread.sleep(1000);
+                    Teamlist = crtTeam.getTeamlist();
+                    i++;
+                    Thread.sleep(1000);
+                } catch (Exception e) {
 
-					Teamlist = crtTeam.getTeamlist();
-					i++;
+                    e.printStackTrace();
+                }
 
-					// System.out.println("Teamlist: " + Teamlist.get(i).getAttribute("class"));
+                crtTeam.getbackButton().click();
+                System.out.println("Head 2 Head league Joined");
 
-				} catch (Exception e) {
+            }
 
-					e.printStackTrace();
-				}
+        }
 
-				if (i == Teamlist.size()) {
-					break;
-				}
+    }
 
-			}
-			Thread.sleep(2000);
-			crtTeam.getbackButton().click();
-		}
+    // Create team logic
+    public void SelectPlayerInList(String size, List<WebElement> PlayerList, WebElement first, WebElement second)
+            throws Exception {
+        if (first.isEnabled()) {
+            int actualSize = Integer.parseInt(size);
+            String playing11 = crtTeam.getselectedplaying11members().getText();
+            // System.out.println("Playing 11 : " + playing11);
+            Thread.sleep(2000);
+            String[] temp = playing11.split("(?=/)");
+            // System.out.println(temp[0]);
 
-	}
+            int memberSelected = Integer.parseInt(temp[0].trim());
 
-	// join league 2 members league and amount less than 100 (Head2Head)
-	public void joinleague2Members() throws InterruptedException {
+            for (int i = 0; i < actualSize; i++) {
 
-		int i;
-		java.util.List<WebElement> Teamlist = null;
+                if (memberSelected <= 11) {
 
-		if (getDoneTutorial)
+                    if (crtTeam.getfirstTeamPlayerSelected().getText().equals("7")
+                            || crtTeam.getsecoundTeamPlayerSelected().getText().equals("7")) {
+                        Thread.sleep(5000);
 
-		{
+                        String script = "$( \".table_desin  .row\" ).each(function() {\r\n"
+                                + "  if($(this).hasClass(\"disabled\")){\r\n" + "console.log(\"Disebled Row\");\r\n"
+                                + "	}else{\r\n" + "console.log(\"Row\");\r\n" + "$('.scroling_div').animate({\r\n"
+                                + "    scrollTop: ($(this).offset().top)\r\n" + "},500); return false; // breaks\r\n"
+                                + "}\r\n" + "});";
 
-			Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getDoneTutorial())).click();
-			Thread.sleep(3000);
+                        js.executeScript(script);
+                        Thread.sleep(2000);
 
-			crtTeam.getAllContests().click();
+                        // for unable player list after 7 player selected from one team
+                        PlayerList = driver.findElements(By.xpath("//div[@class='row']/a"));
+                        // System.out.println("unable Player list count = " + enablePlayerList.size());
+                    }
+                }
 
-			Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getDoneTutorial())).click();
-			Thread.sleep(2000);
+                try {
+                    Random randomGenerator = new Random();
+                    int index = randomGenerator.nextInt(PlayerList.size());
+                    System.out.print(" " + index);
+                    WebElement element = crtTeam.getPlayerlist();
+                    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+                    PlayerList.get(index).click();
+                    PlayerList = driver.findElements(By.xpath("//div[@class='row']/a"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-			// crtTeam.getTeamDcrementsort().click();
+            }
 
-			try {
+            second.click();
 
-				// WebElement element = LeagueAmount.get(LeagueAmountposition);
+        } // FOR LOOP CLOSE
+    } // fUNCTION close
 
-				((JavascriptExecutor) driver)
-						.executeScript("$('.scroling_div').scrollTop(9999999999999999999999999999);");
+    // Joine the league of 6 teams only
+    public void JoineLeague_Of_6_Teams() throws Exception {
 
-			} catch (Exception e) {
+       // java.util.List<WebElement> Teamlist = null;
+        Thread.sleep(2000);
+        if (getDoneTutorial) {
+            Thread.sleep(2000);
+            crtTeam.getDoneTutorial().click();
 
-				e.printStackTrace();
-			}
+            Thread.sleep(2000);
+            crtTeam.getAllContests().click();
+            Thread.sleep(2000);
+            crtTeam.getDoneTutorial().click();
 
-			LeagueSize = crtTeam.getLeagueSize();
-			LeagueAmount = crtTeam.getLeagueAmount();
+            Thread.sleep(1000);
+            crtTeam.getSortByteams().click();
+            crtTeam.getSortByteams().click();
+            try {
+                for (int i = 0; i <= 32; i++) {
+                    js.executeScript("$(\".scroling_div\").scrollTop(99999999999999999999999999999);");
+                }
+                Thread.sleep(1000);
+                js.executeScript("$(\".scroling_div\").scrollTop(0);");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-			for (int j = 0; j < LeagueSize.size(); j++) {
-				String arSplit = LeagueSize.get(j).getText();
-				String teamcount[] = arSplit.split(" ");
+            //TotalContests = crtTeam.getTotalContests();
+            LeagueSize = crtTeam.getLeagueSize();
+            LeagueAmount = crtTeam.getLeagueAmount();
+            M = crtTeam.getM();
+            C = crtTeam.getC();
 
-				String arrSplit = LeagueAmount.get(j).getText();
-				String Leagueamnt[] = arrSplit.split("₹");
+            for (int j = 0; j < LeagueSize.size(); j++) {
+                String arSplit = LeagueSize.get(j).getText();
+                String teamcount[] = arSplit.split(" ");
 
-				System.out.println("Team Count: " + teamcount[0] + ", League amount: " + Leagueamnt[1]);
-				System.out.println(Integer.parseInt(Leagueamnt[1]) < 100 && Integer.parseInt(teamcount[0]) < 2);
+                String arrSplit = LeagueAmount.get(j).getText();
+                int tempLeagueAmount = 0;
+                if (!arrSplit.contains("Free")) {
+                    String Leagueamnt[] = arrSplit.split("₹");
+                    tempLeagueAmount = Integer.parseInt(Leagueamnt[1]);
+                }
 
-				if (Integer.parseInt(Leagueamnt[1]) < 100 && Integer.parseInt(teamcount[0]) < 3
-						&& crtTeam.getS().isDisplayed()) {
+                System.out.println("Team Count: " + teamcount[0] + ", League amount: " + tempLeagueAmount);
+                System.out.println(tempLeagueAmount<100 && Integer.parseInt(teamcount[0])>10 );
+                //System.out.println( M.get(j).isDisplayed() +" "+ !C.get(j).isDisplayed());
 
-					System.out.println(LeagueAmount.get(LeagueAmountposition).getText());
+              if (tempLeagueAmount < 100 && Integer.parseInt(teamcount[0])>10 && M.get(j).isDisplayed()) {
 
-					WebElement element = LeagueAmount.get(LeagueAmountposition);
+                      System.out.println(LeagueAmount.get(LeagueAmountposition).getText());
 
-					((JavascriptExecutor) driver).executeScript("$('.scroling_div').scrollTop(0);", element);
+                      WebElement element = LeagueAmount.get(j);
 
-					LeagueAmount.get(LeagueAmountposition).click();
+                      Actions actions = new Actions(driver);
+                      actions.moveToElement(element).perform();
 
-					break;
+                      Thread.sleep(2000);
+                      element.click();
+                      break;
+                }
+            }
 
-				}
+            //Get team list
+            int i;
+            //to join with only 6 teams
+            int teamcount = 0;
 
-			}
+            Teamlist = crtTeam.getTeamlist();
 
-			Thread.sleep(4000);
+            for (i = 0; i < Teamlist.size(); ) {
 
-			Teamlist = crtTeam.getTeamlist();
+                try {
 
-			for (i = 0; i < Teamlist.size();) {
+                    boolean disableTeams = Teamlist.get(i).getAttribute("class").equals("disable_5");
 
-				// System.out.println("Teamlist: " + Teamlist.get(i).getAttribute("class"));
-				// System.out.println("Teamlist: " +
-				// Teamlist.get(i).getAttribute("class").equals("disable_5"));
+                    if (disableTeams) {
+                        i++;
+                        continue;
+                    }
 
-				try {
+                    Teamlist.get(i).click();
 
-					boolean disableTeams = Teamlist.get(i).getAttribute("class").equals("disable_5");
+                    boolean joinTeam;
 
-					if (disableTeams) {
-						i++;
-						continue;
-					}
+                    try {
 
-					Teamlist.get(i).click();
+                        joinTeam = crtTeam.getJoinContest().isDisplayed();
+                        if (joinTeam) {
+                            crtTeam.getJoinContest().click();
+                            teamcount++;
+                        }
 
-					boolean joinTeam;
+                    } catch (Exception e1) {
+                        boolean joinTeam2 = crtTeam.getJoinContestofTeamlistbtn().isDisplayed();
 
-					try {
-						joinTeam = crtTeam.getJoinContest().isDisplayed();
-						if (joinTeam) {
+                        if (joinTeam2) {
 
-							Thread.sleep(3000);
-							crtTeam.getJoinContest().click();
-						}
+                            crtTeam.getJoinContestofTeamlistbtn().click();
+                        }
 
-					} catch (Exception e1) {
-						boolean joinTeam2 = crtTeam.getJoinContestofTeamlistbtn().isDisplayed();
-						if (joinTeam2) {
+                        e1.printStackTrace();
+                    }
 
-							crtTeam.getJoinContestofTeamlistbtn().click();
-						}
-						e1.printStackTrace();
-					}
+                    Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getLeagueJoinNowbtnPopup())).click();
+                    Thread.sleep(3000);
 
-					Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getLeagueJoinNowbtnPopup())).click();
+                    Teamlist = crtTeam.getTeamlist();
+                    i++;
+                    Thread.sleep(1000);
+                } catch (Exception e) {
 
-					Thread.sleep(1000);
+                    e.printStackTrace();
+                }
 
-					Teamlist = crtTeam.getTeamlist();
-					i++;
+                if (teamcount == 6) {
+                    System.out.println("6 teams joined");
+                    crtTeam.getbackButton().click();
+                }
+                break;
 
-					// System.out.println("Teamlist: " + Teamlist.get(i).getAttribute("class"));
+            }
+        }
 
-				} catch (Exception e) {
+    }
 
-					e.printStackTrace();
-				}
+    static void SelectPlayerInList2(String size, List<WebElement> PlayerListdemo, WebElement first, WebElement second)
+            throws Exception {
 
-				if (i == Teamlist.size()) {
-					break;
-				}
+        /*
+         * PlayerList = PlayerListdemo; if (first.isEnabled()) { actualSize =
+         * Integer.parseInt(size); playing11 =
+         * crtTeam.getselectedplaying11members().getText();
+         * System.out.println("Playing 11 : " + playing11); Thread.sleep(2000); String[]
+         * temp = playing11.split("(?=/)"); // System.out.println(temp[0]);
+         *
+         * memberSelected = Integer.parseInt(temp[0].trim());
+         *
+         * selectPlayerRandomIndex();
+         *
+         * System.out.println("selected player count " + memberSelected);
+         *
+         * if (second != null) second.click(); hs.clear(); }
+         */
 
-			}
-			Thread.sleep(2000);
-			crtTeam.getGotoHome().click();
-		}
+    }
 
-	}
+    static void randomSelection() {
+        generateRandomIndex();
+    }
 
-	// Create team logic
-	public void SelectPlayerInList(String size, List<WebElement> PlayerList, WebElement first, WebElement second)
-			throws Exception {
-		if (first.isEnabled()) {
-			int actualSize = Integer.parseInt(size);
-			String playing11 = crtTeam.getselectedplaying11members().getText();
-			// System.out.println("Playing 11 : " + playing11);
-			Thread.sleep(2000);
-			String[] temp = playing11.split("(?=/)");
-			// System.out.println(temp[0]);
+    static HashSet<Integer> hs = new HashSet<Integer>();
+    static ArrayList<Integer> list = new ArrayList<Integer>();
 
-			int memberSelected = Integer.parseInt(temp[0].trim());
+    static void selectPlayerRandomIndex() {
+        /*
+         * genrateList(); for (int cPos = 0; cPos < list.size(); cPos++) { int index =
+         * list.get(cPos); System.out.print("index " + index);
+         *
+         * WebElement element = PlayerList.get(index); int tempPos = -1; try {
+         * WebElement e = element.findElement(By.xpath("//div[@class='row disabled']"));
+         * if (!e.isDisplayed()) { System.out.println(" not displayed ");
+         * Wait.until(ExpectedConditions.elementToBeClickable(element)).click(); i++;
+         * actualSize--;
+         *
+         * } else { System.out.println("fade displayed at " + index);
+         *
+         * for (int a = 0; a < list.size(); a++) System.out.print(" " + list.get(a));
+         * int no = -1; boolean flag = true; while (flag) { no = (int) (Math.random() *
+         * PlayerList.size()); if (!list.contains(no)) { list.add(no);
+         * list.remove(cPos); tempPos = no; System.out.println("break value " +
+         * tempPos); flag = false; break; } } for (int a = 0; a < list.size(); a++)
+         * System.out.print(" " + list.get(a)); System.out.println("new pos  " +
+         * tempPos); cPos--; } } catch (Exception e) {
+         * System.out.println(" not faded ");
+         * Wait.until(ExpectedConditions.elementToBeClickable(element)).click(); i++;
+         * actualSize--; } }
+         */
+    }
 
-			for (int i = 0; i < actualSize; i++) {
+    static void genrateList() {
 
-				if (memberSelected <= 11) {
+        /*
+         * while (list.size() < actualSize) { int num = (int) (Math.random() *
+         * PlayerList.size()); if (!list.contains(num)) list.add(num); }
+         */
+    }
 
-					if (crtTeam.getfirstTeamPlayerSelected().getText().equals("7")
-							|| crtTeam.getsecoundTeamPlayerSelected().getText().equals("7")) {
-						Thread.sleep(5000);
+    static void generateRandomIndex() {
+        /*
+         * int size = PlayerList.size(); while (hs.size() < actualSize) { int num =
+         * (int) (Math.random() * size); hs.add(num); }
+         */
+    }
 
-						String script = "$( \".table_desin  .row\" ).each(function() {\r\n"
-								+ "  if($(this).hasClass(\"disabled\")){\r\n" + "console.log(\"Disebled Row\");\r\n"
-								+ "	}else{\r\n" + "console.log(\"Row\");\r\n" + "$('.scroling_div').animate({\r\n"
-								+ "    scrollTop: ($(this).offset().top)\r\n" + "},500); return false; // breaks\r\n"
-								+ "}\r\n" + "});";
+    public void captainSelection() throws Exception {
+        System.out.print("start captain selection ");
+        int c = 0, vc = 1;
+        try {
+            List<WebElement> selectCaptainlist = crtTeam.getCaptainTextBox();
+            List<WebElement> selectViceCaptainlist = crtTeam.getViceCaptainBox();
 
-						js.executeScript(script);
-						Thread.sleep(2000);
+            /*
+             * if (selectCaptainlist.size() >= 0 && selectViceCaptainlist.size() >= 0) {
+             *
+             * Random randomGenerator = new Random(); c =
+             * randomGenerator.nextInt(selectCaptainlist.size()); vc =
+             * randomGenerator.nextInt(selectViceCaptainlist.size() / 2);
+             *
+             * System.out.println("Captain List Size = " + selectCaptainlist.size() +
+             * "Vice Captain List size = " + selectViceCaptainlist.size());
+             *
+             * System.out.println("captain = " + c + "ViceCaptain :" + vc); }
+             * if (c == vc) { captainSelection(); }
+             */
 
-						// for unable player list after 7 player selected from one team
-						PlayerList = driver.findElements(By.xpath("//div[@class='row']/a"));
-						// System.out.println("unable Player list count = " + enablePlayerList.size());
-					}
-				}
+            Thread.sleep(1000);
+            Wait.until(ExpectedConditions.elementToBeClickable(selectCaptainlist.get(c))).click();
+            Thread.sleep(1000);
+            Wait.until(ExpectedConditions.elementToBeClickable(selectViceCaptainlist.get(vc))).click();
+        } catch (Exception e) {
+            e.printStackTrace();
+            captainSelection();
+        }
 
-				try {
-					Random randomGenerator = new Random();
-					int index = randomGenerator.nextInt(PlayerList.size());
-					System.out.print(" " + index);
-					WebElement element = crtTeam.getPlayerlist();
-					((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-					PlayerList.get(index).click();
-					PlayerList = driver.findElements(By.xpath("//div[@class='row']/a"));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+        Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getSaveteambtn())).click();
+    } // function close
 
-			}
+    public void SelectTeams_JoineLeague() {
+        int i;
+        Teamlist = null;
 
-			second.click();
+        Teamlist = crtTeam.getTeamlist();
 
-		} // FOR LOOP CLOSE
-	} // fUNCTION close
+        for (i = 0; i < Teamlist.size(); ) {
 
+            try {
 
-	// Joine the league of 6 teams only
-	public void JoineLeague_Of_6_Teams() throws Exception {
+                boolean disableTeams = Teamlist.get(i).getAttribute("class").equals("disable_5");
 
-		Thread.sleep(2000);
-		if (getDoneTutorial) {
-			Thread.sleep(2000);
-			crtTeam.getDoneTutorial().click();
+                if (disableTeams) {
+                    i++;
+                    continue;
 
-			Thread.sleep(2000);
-			crtTeam.getAllContests().click();
-			Thread.sleep(2000);
-			crtTeam.getDoneTutorial().click();			
+                }
 
-			try {
+                Teamlist.get(i).click();
 
-				for (int i = 0; i <= 30; i++) {
-					js.executeScript("$(\".scroling_div\").scrollTop(99999999999999999999999999999);");
-				}
+                boolean joinTeam;
 
-				// Scroll up
-				Thread.sleep(500);
-				js.executeScript("$(\".scroling_div\").scrollTop(0);");
+                try {
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+                    joinTeam = crtTeam.getJoinContest().isDisplayed();
+                    if (joinTeam) {
 
-			TotalContests = crtTeam.getTotalContests();
-			LeagueSize = crtTeam.getLeagueSize();
-			LeagueAmount = crtTeam.getLeagueAmount();
+                        crtTeam.getJoinContest().click();
 
-			for (int j = 0; j < LeagueSize.size(); j++) {
-				String arSplit = LeagueSize.get(j).getText();
-				String teamcount[] = arSplit.split(" ");
+                    }
 
-				String arrSplit = LeagueAmount.get(j).getText();
-				int tempLeagueAmount = 0;
-				if (!arrSplit.contains("Free")) {
-					String Leagueamnt[] = arrSplit.split("₹");
-					tempLeagueAmount = Integer.parseInt(Leagueamnt[1]);
-				}
-		
+                } catch (Exception e1) {
+                    boolean joinTeam2 = crtTeam.getJoinContestofTeamlistbtn().isDisplayed();
 
-				System.out.println("Team Count: " + teamcount[0] + ", League amount: " + tempLeagueAmount);
+                    if (joinTeam2) {
 
-				System.out.println(tempLeagueAmount <= 100 && Integer.parseInt(teamcount[0]) > 6
-						&& crtTeam.getM().isDisplayed() && !crtTeam.getC().isDisplayed());						
+                        crtTeam.getJoinContestofTeamlistbtn().click();
+                    }
 
-				if (tempLeagueAmount <=100 && Integer.parseInt(teamcount[0]) > 6
-						&& crtTeam.getM().isDisplayed() && !crtTeam.getC().isDisplayed()) {
+                    e1.printStackTrace();
+                }
 
-					WebElement element = LeagueAmount.get(LeagueAmountposition);
+                Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getLeagueJoinNowbtnPopup())).click();
 
-					((JavascriptExecutor) driver).executeScript("$('.scroling_div').scrollTop(0);", element);
-					Thread.sleep(500);
-					LeagueAmount.get(LeagueAmountposition).click();
 
-					break;
+                Thread.sleep(3000);
 
-				}
+                FileWriter Csvwriter;
 
-			}
+                try {
 
-		}
+                    String PvtContestCode = crtTeam.getGetCodeofPvtContest().getText();
+                    Thread.sleep(2000);
+                    String path = "ddt/privateContestcode.csv";
 
-		else {
-			Thread.sleep(2000);
-			crtTeam.getAllContests().click();
-			Thread.sleep(2000);
-			crtTeam.getDoneTutorial().click();
+                    Csvwriter = new FileWriter(path);
 
-			try {
+                    Csvwriter.write(PvtContestCode);
+                    Csvwriter.append("\n");
+                    Csvwriter.close();
 
-				for (int i = 0; i <= 30; i++) {
-					js.executeScript("$(\".scroling_div\").scrollTop(99999999999999999999999999999);");
-				}
+                } catch (Exception e) {
 
-				// Scroll up
-				Thread.sleep(500);
-				js.executeScript("$(\".scroling_div\").scrollTop(0);");
+                    e.printStackTrace();
+                }
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+                crtTeam.getClosepvtcontestPopup().click();
 
-			TotalContests = crtTeam.getTotalContests();
-			LeagueSize = crtTeam.getLeagueSize();
-			LeagueAmount = crtTeam.getLeagueAmount();
+                Teamlist = crtTeam.getTeamlist();
+                i++;
 
-			for (int j = 0; j < LeagueSize.size(); j++) {
-				String arSplit = LeagueSize.get(j).getText();
-				String teamcount[] = arSplit.split(" ");
+            } catch (Exception e) {
 
-				String arrSplit = LeagueAmount.get(j).getText();
-				int tempLeagueAmount = 0;
-				if (!arrSplit.contains("Free")) {
-					String Leagueamnt[] = arrSplit.split("₹");
-					tempLeagueAmount = Integer.parseInt(Leagueamnt[1]);
-				}
+                e.printStackTrace();
+            }
 
-				System.out.println("Team Count: " + teamcount[0] + ", League amount: " + tempLeagueAmount);
+            if (i == Teamlist.size()) {
 
-				System.out.println(tempLeagueAmount <= 100 && Integer.parseInt(teamcount[0]) > 6
-						&& crtTeam.getM().isDisplayed() && !crtTeam.getC().isDisplayed());
+                break;
 
-				if (tempLeagueAmount <= 100 && Integer.parseInt(teamcount[0]) > 6 && crtTeam.getM().isDisplayed()
-						&& !crtTeam.getC().isDisplayed()) {
+            }
 
-					// System.out.println(LeagueAmount.get(LeagueAmountposition).getText());
-
-					WebElement element = LeagueAmount.get(LeagueAmountposition);
-
-					((JavascriptExecutor) driver).executeScript("$('.scroling_div').scrollTop(0);", element);
-					Thread.sleep(500);
-					LeagueAmount.get(LeagueAmountposition).click();
-
-					break;
-
-				}
-
-			}
-
-		}
-
-	}
-
-		
-	static void SelectPlayerInList2(String size, List<WebElement> PlayerListdemo, WebElement first, WebElement second)
-			throws Exception {
-
-		/*
-		 * PlayerList = PlayerListdemo; if (first.isEnabled()) { actualSize =
-		 * Integer.parseInt(size); playing11 =
-		 * crtTeam.getselectedplaying11members().getText();
-		 * System.out.println("Playing 11 : " + playing11); Thread.sleep(2000); String[]
-		 * temp = playing11.split("(?=/)"); // System.out.println(temp[0]);
-		 * 
-		 * memberSelected = Integer.parseInt(temp[0].trim());
-		 * 
-		 * selectPlayerRandomIndex();
-		 * 
-		 * System.out.println("selected player count " + memberSelected);
-		 * 
-		 * if (second != null) second.click(); hs.clear(); }
-		 */
-				
-	}
-
-	static void randomSelection() {
-		generateRandomIndex();
-	}
-
-	static HashSet<Integer> hs = new HashSet<Integer>();
-	static ArrayList<Integer> list = new ArrayList<Integer>();
-
-	static void selectPlayerRandomIndex() {
-		/*
-		 * genrateList(); for (int cPos = 0; cPos < list.size(); cPos++) { int index =
-		 * list.get(cPos); System.out.print("index " + index);
-		 * 
-		 * WebElement element = PlayerList.get(index); int tempPos = -1; try {
-		 * WebElement e = element.findElement(By.xpath("//div[@class='row disabled']"));
-		 * if (!e.isDisplayed()) { System.out.println(" not displayed ");
-		 * Wait.until(ExpectedConditions.elementToBeClickable(element)).click(); i++;
-		 * actualSize--;
-		 * 
-		 * } else { System.out.println("fade displayed at " + index);
-		 * 
-		 * for (int a = 0; a < list.size(); a++) System.out.print(" " + list.get(a));
-		 * int no = -1; boolean flag = true; while (flag) { no = (int) (Math.random() *
-		 * PlayerList.size()); if (!list.contains(no)) { list.add(no);
-		 * list.remove(cPos); tempPos = no; System.out.println("break value " +
-		 * tempPos); flag = false; break; } } for (int a = 0; a < list.size(); a++)
-		 * System.out.print(" " + list.get(a)); System.out.println("new pos  " +
-		 * tempPos); cPos--; } } catch (Exception e) {
-		 * System.out.println(" not faded ");
-		 * Wait.until(ExpectedConditions.elementToBeClickable(element)).click(); i++;
-		 * actualSize--; } }
-		 */
-	}
-
-	static void genrateList() {
-
-		/*
-		 * while (list.size() < actualSize) { int num = (int) (Math.random() *
-		 * PlayerList.size()); if (!list.contains(num)) list.add(num); }
-		 */
-	}
-
-	static void generateRandomIndex() {
-		/*
-		 * int size = PlayerList.size(); while (hs.size() < actualSize) { int num =
-		 * (int) (Math.random() * size); hs.add(num); }
-		 */
-	}
-
-	public void captainSelection() throws Exception {
-		System.out.print("start captain selection ");
-		int c = 0, vc = 1;
-		try {
-			List<WebElement> selectCaptainlist = crtTeam.getCaptainTextBox();
-			List<WebElement> selectViceCaptainlist = crtTeam.getViceCaptainBox();
-
-			/*
-			 * if (selectCaptainlist.size() >= 0 && selectViceCaptainlist.size() >= 0) {
-			 * 
-			 * Random randomGenerator = new Random(); c =
-			 * randomGenerator.nextInt(selectCaptainlist.size()); vc =
-			 * randomGenerator.nextInt(selectViceCaptainlist.size() / 2);
-			 * 
-			 * System.out.println("Captain List Size = " + selectCaptainlist.size() +
-			 * "Vice Captain List size = " + selectViceCaptainlist.size());
-			 * 
-			 * System.out.println("captain = " + c + "ViceCaptain :" + vc); }
-			 * 
-			 * 
-			 * 
-			 * if (c == vc) { captainSelection(); }
-			 */
-
-			Thread.sleep(1000);
-			Wait.until(ExpectedConditions.elementToBeClickable(selectCaptainlist.get(c))).click();
-			Thread.sleep(1000);
-			Wait.until(ExpectedConditions.elementToBeClickable(selectViceCaptainlist.get(vc))).click();
-		} catch (Exception e) {
-			e.printStackTrace();
-			captainSelection();
-		}
-
-		Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getSaveteambtn())).click();
-	} // function close
+        }
+    }
 }
