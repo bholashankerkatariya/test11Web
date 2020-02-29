@@ -1,9 +1,9 @@
 package objectRepository;
 
-import java.util.List;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class CreateTeamRepo {
 
@@ -224,8 +224,7 @@ public class CreateTeamRepo {
 	@FindBy(xpath = "//a[contains(text(),'PREVIEW')]")
 	private WebElement TeamPreviewIcon;
 
-// Join Team
-	@FindBy(xpath = "//body/app-root/div[@class='full_view hight_full']/div[@class='left_view']/div[@class='blur_showing']/app-count-down/app-contest-category/div/div[@class='app_center hight_full']/div[@class='scroling_div']/div[@class='contest_listing']/div[1]/a[1]")
+	@FindBy(xpath = "//div[@class='text-center mb-1 two_btns']//a[@class='btn theme_outline'][contains(text(),'View All Contest')]")
 	private WebElement AllContests;
 
 	@FindBy(xpath = "//div[@class = 'contest_data_list contests']/div")
@@ -249,8 +248,6 @@ public class CreateTeamRepo {
 	@FindBy(xpath = "//div[@class='left_view']//a[2]")
 	private WebElement JoinContest;
 
-	@FindBy(xpath = "//body/app-root/div[@class='full_view hight_full']/div[@class='left_view']/div[@class='blur_showing']/app-count-down/app-contest-category/div/div[@class='app_center hight_full']/div[@class='scroling_div']/div[@class='contest_listing']/div[1]/a[1]")
-	private WebElement ViewAllContest;
 
 	@FindBy(xpath = "//footer[@class='add_width_left app_footer']//a[@class='foot_btn']")
 	private WebElement JoinContestofTeamlistbtn;
@@ -301,10 +298,6 @@ public class CreateTeamRepo {
 		return JoinContestofTeamlistbtn;
 	}
 
-	public WebElement getViewAllContest() {
-		return ViewAllContest;
-	}
-
 	public WebElement getSelectFirstTeam() {
 		return SelectFirstTeam;
 	}
@@ -352,7 +345,7 @@ public class CreateTeamRepo {
 	}
 
 	// Private contest
-	@FindBy(xpath = "//button[@class='btn white']")
+	@FindBy(xpath = "//a[@class='btn theme_outline noarrow']")
 	private WebElement CreatePrivateContestbtn;
 
 	@FindBy(xpath = "//input[@placeholder='Give your contest a name']")
@@ -379,14 +372,7 @@ public class CreateTeamRepo {
 	@FindBy(xpath = "//div[contains(text(),'No more than 6 teams allowed in a league with less than 100 members. ')]")
 	private WebElement NoMoreThan6TeamsValidation;
 
-	@FindBy(xpath = "//div[@class='bottom_strip']/ul/li/span[contains(text(),'M')]")
-	private WebElement M;
 
-	@FindBy(xpath = "//div[@class='bottom_strip']/ul/li/span[contains(text(),'C')]")
-	private WebElement C;
-
-	@FindBy(xpath = "//div[@class='bottom_strip']/ul/li/span[contains(text(),'S')]")
-	private WebElement S;
 
 	@FindBy(xpath = "//ul[@class='teams_list']/li")
 	private List<WebElement> Teamlist;
@@ -416,15 +402,24 @@ public class CreateTeamRepo {
 		return Teamlist;
 	}
 
-	public WebElement getS() {
+	@FindBy(xpath = "//div[@class='bottom_strip']/ul/li/span[contains(text(),'S')]")
+	private List<WebElement> S;
+
+	public  List<WebElement> getS() {
 		return S;
 	}
 
-	public WebElement getC() {
+	@FindBy(xpath = "//div[@class='bottom_strip']/ul/li/span[contains(text(),'C')]")
+	private  List<WebElement> C;
+
+	public  List<WebElement> getC() {
 		return C;
 	}
 
-	public WebElement getM() {
+	@FindBy(xpath = "//div[@class='bottom_strip']/ul/li/span[contains(text(),'M')]")
+	private  List<WebElement> M;
+
+	public  List<WebElement> getM() {
 		return M;
 	}
 
@@ -575,6 +570,20 @@ public class CreateTeamRepo {
 	public WebElement getSortByEntryFee() {
 		return SortByEntryFee;
 	}
-	
+
+	@FindBy(xpath = "//a[contains(text(),'Teams')]")
+	private WebElement SortByteams;
+
+	public WebElement getSortByteams() {
+		return SortByteams;
+	}
+
+
+	@FindBy(xpath = "//*[@class='alert_type alert_red']")
+	private WebElement validationMessage;
+
+	public WebElement getvalidationMessage() {
+		return validationMessage;
+	}
 
 }

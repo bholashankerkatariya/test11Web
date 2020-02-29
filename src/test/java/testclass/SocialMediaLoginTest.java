@@ -1,6 +1,7 @@
 package testclass;
 
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import testCases.LoginLogic;
 import utils.Browser;
@@ -9,16 +10,11 @@ public class SocialMediaLoginTest {
 	LoginLogic lgn;
 	Browser browser;
 
-
-	public SocialMediaLoginTest() {	
-		this.browser = new Browser();	
-		lgn = new LoginLogic(this.browser.driver, this.browser.Wait);
-	}
-	
+	@Parameters({"browsers"})
 	@BeforeTest()
-	public void callbrowser()
+	public void callbrowser(String name)
 	{	
-		browser.chrome();
+		browser = new Browser(name);
 		lgn = new LoginLogic(browser.driver, browser.Wait);
 	}
 
@@ -34,7 +30,6 @@ public class SocialMediaLoginTest {
 	 * not working in automation }
 	 */
 	 
-	
 	
 	  @Test(priority = 2, enabled = false) public void GoToProfile() throws
 	  InterruptedException { lgn.Go_To_profile(); }

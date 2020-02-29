@@ -1,25 +1,23 @@
 package testCases;
 
-import java.awt.List;
-import java.util.ArrayList;
-
-import org.openqa.selenium.By;
+import objectRepository.LoginRepository;
+import objectRepository.SignUpObjectRepository;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
-import objectRepository.LoginRepository;
-import objectRepository.SignUpObjectRepository;
 import utils.ApiCallForOtp;
+import utils.Browser;
 import utils.CSVDataReader;
 
 public class SignUpLogic {
 
 	public WebDriver driver;
 	public WebDriverWait Wait;
+	Browser browser;
 	LoginRepository loginRepo;
 	SignUpObjectRepository signupRepo;
 	Actions actions;
@@ -31,6 +29,7 @@ public class SignUpLogic {
 		loginRepo = PageFactory.initElements(driver, LoginRepository.class);
 		signupRepo = PageFactory.initElements(driver, SignUpObjectRepository.class);
 	}
+
 
 	@DataProvider(name = "Signup")
 	public Object[][] CSVReader() throws Exception {

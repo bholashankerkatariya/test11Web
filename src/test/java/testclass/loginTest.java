@@ -1,9 +1,6 @@
 package testclass;
 
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import testCases.LoginLogic;
 import utils.Browser;
 import utils.CSVDataReader;
@@ -12,19 +9,15 @@ public class loginTest {
 	LoginLogic lgn;
 	Browser browser;
 
-	public loginTest() {
-		this.browser = new Browser();
-
-	}
-
 	@DataProvider(name = "Login")
 	public Object[][] CSVReader() throws Exception {
 		return CSVDataReader.DDTReader("ddt/LoginPage.csv");
 	}
 
-	@BeforeTest()
-	public void callbrowser() {
-		browser.chrome();
+	@Parameters({ "browsers" })
+	@BeforeTest
+	public void callbrowser(String name) {
+		browser = new Browser(name);
 		lgn = new LoginLogic(browser.driver, browser.Wait);
 	}
 
@@ -32,7 +25,6 @@ public class loginTest {
 	public void Blank_Submit_Login() throws InterruptedException {
 		lgn.BlankSubmitLogin();
 	}
-
 
 	@Test(priority = 2, enabled = true, dataProvider = "Login")
 	public void Login_with_Invalid_Password(String Username, String Password) throws InterruptedException {
@@ -43,7 +35,7 @@ public class loginTest {
 	public void Login_with_wrong_Email(String Username, String Password) throws InterruptedException {
 		lgn.Login_with_wrong_Email(Username, Password);
 	}
-	
+
 	@Test(priority = 4, enabled = true, dataProvider = "Login")
 	public void Login_With_Valid_Credentials(String Username, String Password) throws InterruptedException {
 		lgn.Login_with_Valid_Credentials(Username, Password);
@@ -54,8 +46,8 @@ public class loginTest {
 		lgn.Go_To_profile();
 	}
 
-	@AfterTest(enabled = false)
-	public void Logout() throws InterruptedException {
-		lgn.logout();
-	}
+/*	@AfterTest(enabled = true)
+	public void teardown() throws InterruptedException {
+		lgn.teardown();
+	}*/
 }

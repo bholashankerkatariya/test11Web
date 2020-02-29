@@ -1,9 +1,12 @@
+/*
+
 package testCases;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
@@ -14,50 +17,51 @@ import objectRepository.CreateTeamRepo;
 import utils.Browser;
 
 public class WithoutLoginLogic extends Browser {
-	BeforeLogicRepository beforelogin;
+	BeforeLogicRepository beforeloginRepo;
 	WebDriverWait Wait;
-	CreateTeamRepo ct;
+	CreateTeamRepo crtRepo;
 	Actions action;
+	WebDriver driver;
 
-	public WithoutLoginLogic() {
-
-		ct = PageFactory.initElements(driver, CreateTeamRepo.class);
-		beforelogin = PageFactory.initElements(driver, BeforeLogicRepository.class);
+	public WithoutLoginLogic(WebDriver _driver, WebDriverWait _Wait) {
+		driver = _driver;
+		Wait = _Wait;
+		crtRepo = PageFactory.initElements(driver, CreateTeamRepo.class);
+		beforeloginRepo = PageFactory.initElements(driver, BeforeLogicRepository.class);
 	}
 
 	public void ClickOnPlayNow() throws InterruptedException {
 
-		if (beforelogin.getMyteamImg().isDisplayed()) {
+		if (beforeloginRepo.getMyteamImg().isDisplayed()) {
 			System.out.println("Verified Myteam11 Logo on Play now screen");
-			
+
 			Actions actions = new Actions(driver);
-			actions.moveToElement(beforelogin.getPlayNowbtn());
+			actions.moveToElement(beforeloginRepo.getPlayNowbtn());
 			actions.perform();
-			
-			beforelogin.getPlayNowbtn().click();
+
+			beforeloginRepo.getPlayNowbtn().click();
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			beforelogin.getSkipTutorial().click();
+			beforeloginRepo.getSkipTutorial().click();
 		}
 
 	}
 
 	public void Verifymatchlist() {
 
-		if (beforelogin.getGameslist().isDisplayed()) {
+		if (beforeloginRepo.getGameslist().isDisplayed()) {
 			System.out.println("Match List appeared on screen");
-
 		}
 
 	}
 
 	public void SelectMatch() throws Exception {
 
-		beforelogin.getSkipTutorial().click();
+		beforeloginRepo.getSkipTutorial().click();
 		driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
 
 		ArrayList<WebElement> list = (ArrayList<WebElement>) driver
 				.findElements(By.xpath("//*[@class='match_listing']//a"));
-		System.out.println("list - match list : " + list.size());
+	System.out.println("list - match list : " + list.size());
 		Thread.sleep(3000);
 		list.get(0).click();
 
@@ -65,7 +69,7 @@ public class WithoutLoginLogic extends Browser {
 
 	public void ChangeInSafeMode() {
 
-		if (beforelogin.getSafeMode().isSelected()) {
+		if (beforeloginRepo.getSafeMode().isSelected()) {
 
 			System.out.println("You are playing in safe mode");
 		}
@@ -73,11 +77,10 @@ public class WithoutLoginLogic extends Browser {
 
 	public void ChangeInRegularMode() {
 
-		if (beforelogin.getSafeMode().isSelected()) {
-			beforelogin.getRegularMode().click();
+		if (beforeloginRepo.getSafeMode().isSelected()) {
+			beforeloginRepo.getRegularMode().click();
 			System.out.println("You are playing in safe mode");
 		}
-
 	}
 
 	public void CreateTeame() {
@@ -89,33 +92,32 @@ public class WithoutLoginLogic extends Browser {
 			e.printStackTrace();
 		}
 
-		beforelogin.getSkipTutorial().click();
+		beforeloginRepo.getSkipTutorial().click();
+		Wait.until(ExpectedConditions.visibilityOf(crtRepo.getS_Bysort()));
+		crtRepo.getWicketKipper().click();
+		crtRepo.getWicketKipper().click();
 
-		Wait.until(ExpectedConditions.visibilityOf(ct.getS_Bysort()));
-		ct.getWicketKipper().click();
-		ct.getWicketKipper().click();
+		Wait.until(ExpectedConditions.visibilityOf(crtRepo.getS_Bysort()));
+	crtRepo.getS_Bysort().click();
+		WebElement list1 = crtRepo.getPlayerRoles();
 
-		Wait.until(ExpectedConditions.visibilityOf(ct.getS_Bysort()));
-		ct.getS_Bysort().click();
-		WebElement list1 = ct.getPlayerRoles();
+		SelectPlayerInList(1, list1, crtRepo.getWicketKipper(), crtRepo.getBatsman());
 
-		SelectPlayerInList(1, list1, ct.getWicketKipper(), ct.getBatsman());
+		list1 = crtRepo.getWicketKipper();
+		SelectPlayerInList(4, list1, crtRepo.getPlayerRoles(), crtRepo.getWicketKipper());
 
-		list1 = ct.getWicketKipper();
-		SelectPlayerInList(4, list1, ct.getPlayerRoles(), ct.getWicketKipper());
+		list1 = crtRepo.getPlayerRoles();
+		SelectPlayerInList(2, list1, crtRepo.getAllrounder(), crtRepo.getBowler());
 
-		list1 = ct.getPlayerRoles();
-		SelectPlayerInList(2, list1, ct.getAllrounder(), ct.getBowler());
+		list1 = crtRepo.getPlayerRoles();
+		SelectPlayerInList(4, list1, crtRepo.getBowler(), crtRepo.getNextbtn());
 
-		list1 = ct.getPlayerRoles();
-		SelectPlayerInList(4, list1, ct.getBowler(), ct.getNextbtn());
+		Wait.until(ExpectedConditions.visibilityOf(crtRepo.getSelectC()));
+		crtRepo.getSelectC().click();
 
-		Wait.until(ExpectedConditions.visibilityOf(ct.getSelectC()));
-		ct.getSelectC().click();
+		crtRepo.getSelectVC().click();
 
-		ct.getSelectVC().click();
-
-		Wait.until(ExpectedConditions.visibilityOf(ct.getSaveteambtn())).click();
+		Wait.until(ExpectedConditions.visibilityOf(crtRepo.getSaveteambtn())).click();
 	}
 
 	static void SelectPlayerInList(int size, WebElement list1, WebElement first, WebElement second) {
@@ -133,3 +135,5 @@ public class WithoutLoginLogic extends Browser {
 	}
 
 }
+
+*/
