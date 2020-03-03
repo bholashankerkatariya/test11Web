@@ -39,7 +39,7 @@ public class Browser {
 
 		}
 
-		 if (browser.equalsIgnoreCase("firefox")) {
+		/* if (browser.equalsIgnoreCase("firefox")) {
 			System.out.println("Firefox browser is opening"); 
 			// String path =
 			System.setProperty("webdriver.gecko.driver",
@@ -62,7 +62,7 @@ public class Browser {
 			driver.manage().window().maximize();
 			Wait = new WebDriverWait(driver, 30);
 
-		}
+		}*/
 	}
 
 	 /* public WebDriver getDriver() { if (driver == null) { driver = new

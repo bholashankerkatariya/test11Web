@@ -1,4 +1,3 @@
-/*
 package testCases;
 
 import org.openqa.selenium.WebDriver;
@@ -12,7 +11,7 @@ import objectRepository.LoginRepository;
 import objectRepository.ProfileRepository;
 import utils.CSVDataReader;
 
-public class LeftMenuPanel {
+public class LeftMenuPanelLogic {
 
     WebDriver driver;
     WebDriverWait Wait;
@@ -22,14 +21,15 @@ public class LeftMenuPanel {
     Actions actions;
 
     String validation1 = "Old Password is required";
-    String validation2 ="Password is required.";
-    String validation3 ="Confirm password is required.";
-    String validation4 ="Password doesn't match";
+    String validation2 = "Password is required.";
+    String validation3 = "Confirm password is required.";
+    String validation4 = "Password does not match";
 
-    public LeftMenuPanel(WebDriver _driver, WebDriverWait _Wait) {
+    public LeftMenuPanelLogic(WebDriver _driver, WebDriverWait _Wait) {
         driver =
                 _driver;
         Wait = _Wait;
+        
         logoutRepo = PageFactory.initElements(driver,
                 LogOutRepository.class);
         loginRepo = PageFactory.initElements(driver,
@@ -46,14 +46,13 @@ public class LeftMenuPanel {
     public void Go_To_profile() throws InterruptedException {
         Thread.sleep(4000);
         logoutRepo.getLeftPanelprfl().click();
-        Wait.until(ExpectedConditions.elementToBeClickable(logoutRepo.getMyProfile())
-        ).click();
-        Thread.sleep(3000);
-        Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.
-                getTutorialSkipButton())).click();
+        Thread.sleep(2000);
+        logoutRepo.getMyProfile().click();
+        Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
     }
 
     public void Fill_Profile_Details() throws InterruptedException {
+        Go_To_profile();
         Thread.sleep(3000);
         prflRepo.getEditProfileicon().click();
         Thread.sleep(3000);
@@ -67,13 +66,13 @@ public class LeftMenuPanel {
         Thread.sleep(1000);
         prflRepo.getEnterDOB().sendKeys("01022001");
 
-        if (prflRepo.getMale().isSelected()) {
+        if (prflRepo.getMale().isEnabled()) {
             Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.getFemale())).
                     click();
             System.out.println("Famale selected");
         }
 
-        if (prflRepo.getFemale().isSelected()) {
+        if (prflRepo.getFemale().isEnabled()) {
             Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.getMale())).click
                     ();
             System.out.println("Male selected");
@@ -90,13 +89,14 @@ public class LeftMenuPanel {
 
         Thread.sleep(2000);
         prflRepo.getUpdateProfileBtn().click();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         driver.navigate().back();
 
     }
 
     public void Change_Password() throws Exception {
 
+        Go_To_profile();
         Thread.sleep(2000);
         prflRepo.getEditProfileicon().click();
         Thread.sleep(1000);
@@ -125,7 +125,6 @@ public class LeftMenuPanel {
                     validation2);
         }
 
-
         Thread.sleep(1000);
 
         String BodyText3 = prflRepo.getCnfrmPasswrdIsRequired().getText();
@@ -137,8 +136,8 @@ public class LeftMenuPanel {
 
         System.out.println("Case1 Passed");
 
-
-       // Case 2:Check Validation for New and confirm password
+        // Case 2:Check Validation for New and confirm password
+        prflRepo.getEnterOldpassword().clear();
         prflRepo.getEnterOldpassword().sendKeys("Arjun@123");
         prflRepo.getEnterNewpassword().click();
         prflRepo.getReEnterNewpassword().click();
@@ -152,7 +151,6 @@ public class LeftMenuPanel {
             System.out.println(BodyText21 + ": " + validation2);
         }
 
-
         String BodyText31 = prflRepo.getCnfrmPasswrdIsRequired().getText();
 
         if (validation3.equals(BodyText31)) {
@@ -161,14 +159,16 @@ public class LeftMenuPanel {
         }
 
         System.out.println("Case2 Passed");
+        Thread.sleep(2000);
 
-       // Case 3:Check New and Confirm password not matching
+        // Case 3:Check New and Confirm password not matching
         prflRepo.getEnterOldpassword().clear();
         prflRepo.getEnterOldpassword().sendKeys("Arjun@123");
+        prflRepo.getEnterNewpassword().clear();
         prflRepo.getEnterNewpassword().sendKeys("Arjun@123");
-        prflRepo.getReEnterNewpassword().sendKeys("rjun@12");
+        prflRepo.getReEnterNewpassword().clear();
+        prflRepo.getReEnterNewpassword().sendKeys("jun@12");
         Thread.sleep(1000);
-
 
         String BodyText4 = prflRepo.getPasswrdDoesntMatch().getText();
 
@@ -179,16 +179,17 @@ public class LeftMenuPanel {
 
         System.out.println("Case3 Passed");
 
+        // Case 4:Change password
         Thread.sleep(2000);
-
-       // Case 4:Change password driver.navigate().refresh();
-        Thread.sleep(5000);
+        prflRepo.getEnterOldpassword().clear();
         prflRepo.getEnterOldpassword().sendKeys("Arjun@123");
+        prflRepo.getEnterNewpassword().clear();
         prflRepo.getEnterNewpassword().sendKeys("Arjun@123");
+        prflRepo.getReEnterNewpassword().clear();
         prflRepo.getReEnterNewpassword().sendKeys("Arjun@123");
+
         Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.
                 getUpdatePasswordsubmitBtn())).click();
-
     }
 
     public void Goto_settings() throws InterruptedException {
@@ -203,8 +204,32 @@ public class LeftMenuPanel {
         Thread.sleep(1000);
         prflRepo.getOpenThemeSection().click();
         Thread.sleep(1000);
-        prflRepo.getFifthTheme().click();
-        System.out.println("Fifth Theme got selected");
+
+        if (prflRepo.getFirstTheme().isEnabled()) {
+            prflRepo.getScndTheme().click();
+            System.out.println("Second Theme got selected");
+        }
+
+        if (prflRepo.getScndTheme().isEnabled()) {
+            prflRepo.getThirdTheme().click();
+            System.out.println("Third Theme got selected");
+        }
+
+        if (prflRepo.getThirdTheme().isEnabled()) {
+            prflRepo.getFourthTheme().click();
+            System.out.println("Fourth Theme got selected");
+        }
+
+        if (prflRepo.getFourthTheme().isEnabled()) {
+            prflRepo.getFifthTheme().click();
+            System.out.println("Fifth Theme got selected");
+        }
+
+        if (prflRepo.getFifthTheme().isEnabled()) {
+            prflRepo.getFirstTheme().click();
+            System.out.println("First Theme got selected");
+        }
+
         Thread.sleep(3000);
         driver.navigate().back();
     }
@@ -215,70 +240,70 @@ public class LeftMenuPanel {
         Thread.sleep(2000);
         prflRepo.getOpenMatchTimeSection().click();
 
+        prflRepo.getDHMSformate().click();
         prflRepo.getHoursformat().click();
         prflRepo.getDateTimeFormat().click();
-        prflRepo.getDHMSformate().click();
-
-        if (prflRepo.getDHMSformate().isSelected()) {
+        //boolean Hoursformate = prflRepo.getHoursformat() != true;
+        if (prflRepo.getDHMSformate().isEnabled()) {
             System.out.println(prflRepo.getDHMSformate().isSelected());
             prflRepo.getHoursformat().click();
-            //System.out.println(prflRepo.getDHMSformate().isEnabled()); }
-
-            if (prflRepo.getHoursformat().isSelected()) {
-                System.out.println(prflRepo.getHoursformat().isSelected());
-                prflRepo.getDateTimeFormat().click();
-            }
-
-            if (prflRepo.getDateTimeFormat().isSelected()) {
-                System.out.println(prflRepo.getDateTimeFormat().isSelected());
-                prflRepo.getDHMSformate().click();
-            }
-
-            Thread.sleep(3000);
-
+            //System.out.println(prflRepo.getDHMSformate().isEnabled());
         }
 
-        public void Change_Language() {
-            Goto_settings();
-            prflRepo.getOpenLanguageSection().click();
-
-            if (prflRepo.getChooseHindi().isSelected()) {
-                System.out.println(prflRepo.getChooseHindi().isSelected());
-
-                prflRepo.getChooseEnglish().click();
-            }
-
-            if (prflRepo.getChooseEnglish().isSelected()) {
-
-                System.out.println(prflRepo.getChooseEnglish().isSelected());
-                prflRepo.getChooseHindi().click();
-            }
-
-            driver.navigate().back();
+        if (prflRepo.getHoursformat().isEnabled()) {
+            System.out.println(prflRepo.getHoursformat().isSelected());
+            prflRepo.getDateTimeFormat().click();
         }
 
-        public void Refer_And_Earn() {
-            Wait.until(ExpectedConditions.elementToBeClickable(logoutRepo.getLeftPanelprfl())).click();
-            Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.getReferAndEarn())).click();
-            Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.
-                    getInviteFriendbtn())).click();
-            Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.getCopyCode())).
-                    click();
-            Thread.sleep(5000);
-            driver.navigate().back();
+        if (prflRepo.getDateTimeFormat().isEnabled()) {
+            System.out.println(prflRepo.getDateTimeFormat().isSelected());
+            prflRepo.getDHMSformate().click();
         }
 
-        public void Help_desk() {
-            Wait.until(ExpectedConditions.elementToBeClickable(logoutRepo.
-                    getLeftPanelprfl())).click();
-            Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.getSupport())).
-                    click();
-            actions = new Actions(driver);
-            actions.moveToElement(prflRepo.getVerifyEmailsUs()).perform();
-            System.out.println("Support features verified");
-            driver.navigate().back();
-        }
+        Thread.sleep(3000);
+        driver.navigate().back();
     }
+
+
+    public void Change_Language() throws InterruptedException {
+        Goto_settings();
+        prflRepo.getOpenLanguageSection().click();
+        boolean Hindi = prflRepo.getChooseHindi() != null;
+        if (Hindi) {
+            System.out.println(Hindi);
+
+            prflRepo.getChooseEnglish().click();
+        }
+
+        boolean English = prflRepo.getChooseEnglish() != null;
+        if (English) {
+            System.out.println(English);
+            prflRepo.getChooseHindi().click();
+        }
+        driver.navigate().back();
+    }
+
+    public void Refer_And_Earn() throws InterruptedException {
+        Wait.until(ExpectedConditions.elementToBeClickable(logoutRepo.getLeftPanelprfl())).click();
+        Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.getReferAndEarn())).click();
+        Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.
+                getInviteFriendbtn())).click();
+        Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.getCopyCode())).
+                click();
+        Thread.sleep(5000);
+        driver.navigate().back();
+    }
+
+    public void Help_desk() {
+        Wait.until(ExpectedConditions.elementToBeClickable(logoutRepo.
+                getLeftPanelprfl())).click();
+        Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.getSupport())).
+                click();
+        actions = new Actions(driver);
+        actions.moveToElement(prflRepo.getVerifyEmailsUs()).perform();
+        System.out.println("Support features verified");
+        driver.navigate().back();
+    }
+
 }
 
-*/

@@ -26,7 +26,7 @@ public class JoinLeagueTest {
 	
 	@Parameters({"browsers"})
 	@BeforeTest
-	public void callbrowser(String name ){
+	public void CallBrowser(String name ){
 		browser = new Browser(name);
 		
 		lgn = new LoginLogic(browser.driver, browser.Wait);
@@ -45,7 +45,6 @@ public class JoinLeagueTest {
 
 	@Test(priority = 3, enabled = false, dataProvider = "teamCombination")
 	public void CreateTeam(String WK, String Bat, String AR, String Bowl) throws Exception {
-
 		/*
 		 * Thread.sleep(2000); System.out.println("Team " + count + " : " + WK + " " +
 		 * Bat + " " + AR + " " + Bowl); joinleague.TeamSelection2(WK, Bat, AR, Bowl);

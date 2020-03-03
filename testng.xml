@@ -4,7 +4,7 @@
   <test thread-count="5" name="Test">
   <parameter name="browsers" value="chrome" />
 		<classes>
-			<class name="testclass.JoinLeagueTest">
+			<class name="testclass.LeftMenuPanelTest">
 				<!-- <methods>
 					<include name="callbrowser" />
 				</methods> -->

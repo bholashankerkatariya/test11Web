@@ -238,7 +238,7 @@ public class ProfileRepository {
 	}
 	
 	
-	@FindBy(xpath = "//span[contains(text(),'Password doen't match')]")
+	@FindBy(xpath = "//span[contains(text(),'Password does not match')]")
 	private WebElement PasswrdDoesntMatch;
 	
 	@FindBy(xpath = "//Span[contains(text(),'Confirm password is required.')]")
@@ -388,7 +388,7 @@ public class ProfileRepository {
 	@FindBy(xpath = "//input[@formcontrolname='DOB']")
 	public WebElement EnterDOB;
 	
-	@FindBy(xpath = "//div[7]//input[1]")//input[@formcontrolname='Address']
+	@FindBy(xpath = "//div[7]//input[1]") //input[@formcontrolname='Address']
 	public WebElement EnterAddress;
 	
 	@FindBy(xpath = "//button[@class='foot_btn']")
@@ -411,7 +411,5 @@ public class ProfileRepository {
 	
 	@FindBy(xpath = "//button[@class='foot_btn']")
 	public WebElement UpdatePasswordsubmitBtn;
-	
-	
 
 }
