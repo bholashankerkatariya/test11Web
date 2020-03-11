@@ -34,45 +34,53 @@ public class LeftMenuPanelTest {
     }
 
     @Test(priority = 2, enabled = false)
-    public void Go_To_profile() throws InterruptedException {
-        leftmenupanel.Go_To_profile();
+    public void Show_Earn_text() throws InterruptedException {
+        leftmenupanel.ReferAndEarn();
     }
 
-    @Test(priority = 3, enabled = true)
+    @Test(priority = 3, enabled = false)
+    public void Support() throws InterruptedException {
+        leftmenupanel.Support();
+    }
+
+    @Test(priority = 4, enabled = false)
     public void Fill_Profile_Details()
             throws InterruptedException {
         leftmenupanel.Fill_Profile_Details();
-
-    }
-//done
-    @Test(priority = 4, enabled = false)
-    public void Change_Password() throws
-            Exception {
-        leftmenupanel.Change_Password();
     }
 
-    //done
     @Test(priority = 5, enabled = false)
     public void Change_Theme() throws
             InterruptedException {
         leftmenupanel.Change_Theme();
     }
-//done
+
     @Test(priority = 6, enabled = false)
     public void Select_Time_formate() throws
             InterruptedException {
         leftmenupanel.Select_Time_format();
     }
-//  done
+
     @Test(priority = 7, enabled = false)
     public void Changelanguage() throws
             InterruptedException {
         leftmenupanel.Change_Language();
     }
 
-    @AfterTest(enabled = false)
+    @Test(priority = 8, enabled = true)
+    public void Polls() throws InterruptedException {
+        leftmenupanel.polls();
+    }
+
+    @Test(priority = 9, enabled = false)
+    public void Change_Password() throws
+            Exception {
+        leftmenupanel.Change_Password();
+    }
+
+    @AfterTest(enabled = true)
     public void Logout() throws InterruptedException {
-        lgn.logout(); driver.quit();
+        lgn.logout();
     }
 }
 

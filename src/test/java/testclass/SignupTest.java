@@ -58,7 +58,8 @@ public class SignupTest {
 
     @AfterTest(enabled = true)
     public void Logout() throws InterruptedException {
-        lgn.teardown();
+        lgn.logout();
+
     }
 
 }

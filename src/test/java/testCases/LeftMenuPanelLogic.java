@@ -1,5 +1,8 @@
 package testCases;
 
+import org.apache.commons.collections.bag.SynchronizedSortedBag;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
@@ -9,6 +12,7 @@ import org.testng.annotations.DataProvider;
 import objectRepository.LogOutRepository;
 import objectRepository.LoginRepository;
 import objectRepository.ProfileRepository;
+import testclass.SocialMediaLoginTest;
 import utils.CSVDataReader;
 
 public class LeftMenuPanelLogic {
@@ -18,6 +22,7 @@ public class LeftMenuPanelLogic {
     LoginRepository loginRepo;
     LogOutRepository logoutRepo;
     ProfileRepository prflRepo;
+    JavascriptExecutor js;
     Actions actions;
 
     String validation1 = "Old Password is required";
@@ -29,7 +34,7 @@ public class LeftMenuPanelLogic {
         driver =
                 _driver;
         Wait = _Wait;
-        
+
         logoutRepo = PageFactory.initElements(driver,
                 LogOutRepository.class);
         loginRepo = PageFactory.initElements(driver,
@@ -51,6 +56,17 @@ public class LeftMenuPanelLogic {
         Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
     }
 
+    public void ReferAndEarn() throws InterruptedException {
+        logoutRepo.getLeftPanelprfl().click();
+        Thread.sleep(3000);
+        String earn = prflRepo.getEarntext().getText();
+        System.out.println(earn);
+
+        prflRepo.getReferAndEarn().click();
+        Thread.sleep(2000);
+        driver.navigate().back();
+    }
+
     public void Fill_Profile_Details() throws InterruptedException {
         Go_To_profile();
         Thread.sleep(3000);
@@ -67,15 +83,21 @@ public class LeftMenuPanelLogic {
         prflRepo.getEnterDOB().sendKeys("01022001");
 
         if (prflRepo.getMale().isEnabled()) {
-            Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.getFemale())).
-                    click();
-            System.out.println("Famale selected");
+            Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.getFemale())).click();
+            //System.out.println("Famale Gender selected");
         }
+        else {
+                Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.getMale())).click();
+                //System.out.println("Male Gender selected");
+            }
 
         if (prflRepo.getFemale().isEnabled()) {
-            Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.getMale())).click
-                    ();
-            System.out.println("Male selected");
+            Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.getMale())).click();
+            //System.out.println("Male Gender selected");
+        }
+        else {
+                prflRepo.getFemale().click();
+                //System.out.println("FeMale Gender selected");
         }
 
         Thread.sleep(1000);
@@ -248,16 +270,22 @@ public class LeftMenuPanelLogic {
             System.out.println(prflRepo.getDHMSformate().isSelected());
             prflRepo.getHoursformat().click();
             //System.out.println(prflRepo.getDHMSformate().isEnabled());
+        } else {
+            prflRepo.getDHMSformate().click();
         }
 
         if (prflRepo.getHoursformat().isEnabled()) {
             System.out.println(prflRepo.getHoursformat().isSelected());
             prflRepo.getDateTimeFormat().click();
+        } else {
+            prflRepo.getHoursformat().click();
         }
 
         if (prflRepo.getDateTimeFormat().isEnabled()) {
             System.out.println(prflRepo.getDateTimeFormat().isSelected());
             prflRepo.getDHMSformate().click();
+        }else{
+            prflRepo.getDateTimeFormat().click();
         }
 
         Thread.sleep(3000);
@@ -271,38 +299,68 @@ public class LeftMenuPanelLogic {
         boolean Hindi = prflRepo.getChooseHindi() != null;
         if (Hindi) {
             System.out.println(Hindi);
-
             prflRepo.getChooseEnglish().click();
+        } else {
+            prflRepo.getChooseHindi().click();
         }
 
         boolean English = prflRepo.getChooseEnglish() != null;
         if (English) {
             System.out.println(English);
             prflRepo.getChooseHindi().click();
+        } else{
+            prflRepo.getChooseEnglish().click();
         }
+
         driver.navigate().back();
     }
 
-    public void Refer_And_Earn() throws InterruptedException {
+
+    public void Support() throws InterruptedException {
+
         Wait.until(ExpectedConditions.elementToBeClickable(logoutRepo.getLeftPanelprfl())).click();
-        Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.getReferAndEarn())).click();
-        Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.
-                getInviteFriendbtn())).click();
-        Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.getCopyCode())).
-                click();
-        Thread.sleep(5000);
-        driver.navigate().back();
-    }
-
-    public void Help_desk() {
-        Wait.until(ExpectedConditions.elementToBeClickable(logoutRepo.
-                getLeftPanelprfl())).click();
-        Wait.until(ExpectedConditions.elementToBeClickable(prflRepo.getSupport())).
-                click();
+        Thread.sleep(2000);
+        prflRepo.getSupport().click();
+        Thread.sleep(2000);
         actions = new Actions(driver);
         actions.moveToElement(prflRepo.getVerifyEmailsUs()).perform();
-        System.out.println("Support features verified");
+        Thread.sleep(200);
+       String call = prflRepo.getCallUs().getText();
+        System.out.println(call);
+
+       String livechat = prflRepo.getLiveChat().getText();
+        System.out.println(livechat);
+
+        String email = prflRepo.getVerifyEmailsUs().getText();
+        System.out.println(email);
+
+        String faqs = prflRepo.getFaqs().getText();
+        System.out.println(faqs);
+        prflRepo.getFaqs().click();
+        Thread.sleep(1000);
+
+      /*  try {
+            for (int j = 0; j <10; j++) {
+                js.executeScript("$(\".scroling_div\").scrollTop(99999999999999999999999999999);");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } */
         driver.navigate().back();
+        driver.navigate().back();
+    }
+
+
+    public void polls() throws InterruptedException {
+
+        Wait.until(ExpectedConditions.elementToBeClickable(logoutRepo.getLeftPanelprfl())).click();
+        Thread.sleep(2000);
+        prflRepo.getPolls().click();
+        if(prflRepo.getVerifyNodatafoundtext().isDisplayed()){
+          String message =  prflRepo.getVerifyNodatafoundtext().getText();
+          System.out.println(message);
+        }
+         driver.navigate().back();
     }
 
 }

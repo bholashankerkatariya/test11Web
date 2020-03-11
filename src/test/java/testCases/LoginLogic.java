@@ -23,16 +23,16 @@ public class LoginLogic {
 	WebDriverWait Wait;
 	LoginRepository loginRepo;
 	LogOutRepository logoutRepo;
-	Actions actions;	
+	Actions actions;
 	Action act;
-	
+
 	JavascriptExecutor js;
 	WebElement closeButtonList;
 
 	public LoginLogic(WebDriver _driver, WebDriverWait _Wait) {
 		driver = _driver;
 		Wait = _Wait;
-		
+
 		logoutRepo = PageFactory.initElements(driver, LogOutRepository.class);
 		loginRepo = PageFactory.initElements(driver, LoginRepository.class);
 		js = (JavascriptExecutor) driver;
@@ -47,7 +47,7 @@ public class LoginLogic {
 	public void BlankSubmitLogin() throws InterruptedException {
 		//actions = new Actions(driver);
 		// System.out.println("in loop: "+ lg.getSigninlnk().getText());
-	
+
 		Thread.sleep(2000);
 		loginRepo.getSigninlnk().click();
 		Thread.sleep(2000);
@@ -69,7 +69,7 @@ public class LoginLogic {
 		Thread.sleep(2000);
 	}
 
-	public void Login_with_wrong_Email(String Username, String Password) throws InterruptedException  {
+	public void Login_with_wrong_Email(String Username, String Password) throws InterruptedException {
 		actions = new Actions(driver);
 		actions.moveToElement(loginRepo.getSigninbtn()).perform();
 		Thread.sleep(500);
@@ -105,29 +105,29 @@ public class LoginLogic {
 			loginRepo.getSubmitbtn().click();
 			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
 			System.out.println("User logged in successfully");
-			
+
 			//close addpopup 
 			act.PopClose(loginRepo);
 		}
-	
-			Thread.sleep(2000);
-			String URL1 = driver.getCurrentUrl();
-			
-			if(URL1.contains("login")) {
-				
-				Thread.sleep(1000);
-				loginRepo.getUsernametxt().clear();
-				loginRepo.getUsernametxt().sendKeys(Username);
-				loginRepo.getPasswordtxt().clear();
-				loginRepo.getPasswordtxt().sendKeys(Password);
-				Thread.sleep(2000);
-				loginRepo.getSubmitbtn().click();
-				Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
-				System.out.println("User LoggedIn Successfully");
 
-				//close add popup 
-				act.PopClose(loginRepo);		
-			}				
+		Thread.sleep(2000);
+		String URL1 = driver.getCurrentUrl();
+
+		if (URL1.contains("login")) {
+
+			Thread.sleep(1000);
+			loginRepo.getUsernametxt().clear();
+			loginRepo.getUsernametxt().sendKeys(Username);
+			loginRepo.getPasswordtxt().clear();
+			loginRepo.getPasswordtxt().sendKeys(Password);
+			Thread.sleep(2000);
+			loginRepo.getSubmitbtn().click();
+			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
+			System.out.println("User LoggedIn Successfully");
+
+			//close add popup
+			act.PopClose(loginRepo);
+		}
 	}
 
 
@@ -204,22 +204,16 @@ public class LoginLogic {
 	}
 
 	public void logout() throws InterruptedException {
+
+		Go_To_profile();
 		Thread.sleep(2000);
 		actions = new Actions(driver);
 		actions.moveToElement(logoutRepo.getLogoutbtn()).perform();
 
 		Wait.until(ExpectedConditions.elementToBeClickable(logoutRepo.getLogoutbtn())).click();
-		System.out.println("User LoggedOut Successfully");
-		Thread.sleep(4000);
-		driver.quit();
-		System.out.println("Browser closed");
-	}
-	
-	public void teardown() {
+		System.out.println("User Logged Out Successfully");
+		Thread.sleep(2000);
 		driver.quit();
 	}
-
-	
-
 }
 

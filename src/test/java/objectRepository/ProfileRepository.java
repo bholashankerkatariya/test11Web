@@ -30,11 +30,6 @@ public class ProfileRepository {
 		return FollowUs;
 	}
 
-
-	public WebElement getLiveChat() {
-		return LiveChat;
-	}
-
 	public WebElement getSettings() {
 		return Settings;
 	}
@@ -250,7 +245,7 @@ public class ProfileRepository {
 	@FindBy(xpath = "//Span[contains(text(),'Old Password is required')]")
 	private WebElement OldPasswrdIsRequired;
 	
-	@FindBy(xpath = "//li[3]//a[1]")
+	@FindBy(xpath = "//div[@class='support_services']//li[3]//a[1]")
 	private WebElement VerifyEmailsUs;
 	
 	@FindBy(xpath = "//label[contains(text(),'Male')]") ////input[@id='gen1']
@@ -268,7 +263,7 @@ public class ProfileRepository {
 	@FindBy(xpath = "//a[contains(text(),'Support')]")
 	private WebElement Support;
 
-	@FindBy(xpath = "//input[@type='password']//a[contains(text(),'Polls')]")
+	@FindBy(xpath = "//a[contains(text(),'Polls')]")
 	public WebElement Polls;
 
 	@FindBy(xpath = "//a[contains(text(),'Feedback')]")
@@ -276,9 +271,6 @@ public class ProfileRepository {
 	
 	@FindBy(xpath = "//a[contains(text(),'Follow Us')]")
 	public WebElement FollowUs;
-	
-	@FindBy(xpath = "//a[contains(text(),'Live Chat')]")
-	public WebElement LiveChat;
 	
 	@FindBy(xpath = "//a[contains(text(),'Settings')]")
 	public WebElement Settings;
@@ -412,4 +404,31 @@ public class ProfileRepository {
 	@FindBy(xpath = "//button[@class='foot_btn']")
 	public WebElement UpdatePasswordsubmitBtn;
 
+	@FindBy(xpath = "//span[@class='notification']")
+	private WebElement earntext;
+
+	public WebElement getEarntext() {
+		return earntext;
+	}
+
+	@FindBy(xpath = "//div[@class='app_center hight_full']//li[1]//a[1]")
+	private WebElement CallUs;
+
+	public WebElement getCallUs() {
+		return CallUs;
+	}
+
+	@FindBy(xpath = "//div[@class='app_center hight_full']//li[2]//a[1]")
+	private WebElement LiveChat;
+
+	public WebElement getLiveChat() {
+		return LiveChat;
+	}
+
+	@FindBy(xpath = "//div[@class='app_center hight_full']//li[4]//a[1]")
+	private WebElement Faqs;
+
+	public WebElement getFaqs() {
+		return Faqs;
+	}
 }
