@@ -657,6 +657,133 @@ public class JoinLeagueLogic {
 
     }
 
+    public void SelectTeams_JoineLeague() {
+        int i;
+        Teamlist = null;
+
+        Teamlist = crtTeam.getTeamlist();
+
+        for (i = 0; i < Teamlist.size(); ) {
+
+            try {
+
+                boolean disableTeams = Teamlist.get(i).getAttribute("class").equals("disable_5");
+
+                if (disableTeams) {
+                    i++;
+                    continue;
+
+                }
+
+                Teamlist.get(i).click();
+
+                boolean joinTeam;
+
+                try {
+
+                    joinTeam = crtTeam.getJoinContest().isDisplayed();
+                    if (joinTeam) {
+
+                        crtTeam.getJoinContest().click();
+
+                    }
+
+                } catch (Exception e1) {
+                    boolean joinTeam2 = crtTeam.getJoinContestofTeamlistbtn().isDisplayed();
+
+                    if (joinTeam2) {
+
+                        crtTeam.getJoinContestofTeamlistbtn().click();
+                    }
+
+                    e1.printStackTrace();
+                }
+
+                Wait.until(ExpectedConditions.elementToBeClickable(crtTeam.getLeagueJoinNowbtnPopup())).click();
+
+
+                Thread.sleep(3000);
+
+                FileWriter Csvwriter;
+
+                try {
+
+                    String PvtContestCode = crtTeam.getGetCodeofPvtContest().getText();
+                    Thread.sleep(2000);
+                    String path = "ddt/privateContestcode.csv";
+
+                    Csvwriter = new FileWriter(path);
+
+                    Csvwriter.write(PvtContestCode);
+                    Csvwriter.append("\n");
+                    Csvwriter.close();
+
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
+
+                crtTeam.getClosepvtcontestPopup().click();
+
+                Teamlist = crtTeam.getTeamlist();
+                i++;
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+
+            if (i == Teamlist.size()) {
+
+                break;
+
+            }
+
+        }
+    }
+
+    // Join the league of 6 teams only
+    public void JoineLeague_Of_6_Teams() throws Exception {
+
+        if (getDoneTutorial) {
+            Thread.sleep(2000);
+            crtTeam.getDoneTutorial().click();
+
+            Thread.sleep(2000);
+            crtTeam.getAllContests().click();
+            Thread.sleep(2000);
+            crtTeam.getDoneTutorial().click();
+
+            Thread.sleep(1000);
+            crtTeam.getSortByteams().click();
+            crtTeam.getSortByteams().click();
+            try {
+                for (int i = 0; i <= 32; i++) {
+                    js.executeScript("$(\".scroling_div\").scrollTop(99999999999999999999999999999);");
+                }
+                Thread.sleep(1000);
+                js.executeScript("$(\".scroling_div\").scrollTop(0);");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            List<WebElement> leagueCard = driver.findElements(By.xpath("//*[@class = 'card_in contest_card_in']"));
+            for (int j = 0; j < leagueCard.size(); j++) {
+
+                //leagueCard = driver.findElements(By.xpath("//*[@class = 'card_in contest_card_in']"));
+                String[] leagueType = leagueCard.get(j).findElement(By.xpath("//ul[@class = 'point_type']")).getText().split("(?!^)");
+                String[] leagueAmount = leagueCard.get(j).findElement(By.xpath("//*[@class = 'fee']/span/span")).getText().split("₹");
+                String[] leagueTeamSize = leagueCard.get(j).findElement(By.xpath("//div[@class='contest_data_list contests']/div/div/div/div[3]/div[3]")).getText().split(" ");
+
+
+                System.out.println("LeagueType :" + leagueType[0] + " LeagueAmount :" + leagueAmount[1] + " LeagueTemeSize:" + leagueTeamSize[0]);
+                leagueType = null;
+                leagueAmount = null;
+                leagueTeamSize = null;
+            } //close for loop j
+
+        }
+    }
+
     // Create team logic
     public void SelectPlayerInList(String size, List<WebElement> PlayerList, WebElement first, WebElement second)
             throws Exception {
