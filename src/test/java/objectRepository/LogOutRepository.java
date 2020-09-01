@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LogOutRepository {
-	
+
 	@FindBy(xpath = "//div[@class='avtar menu_toggle']//img")
 	private WebElement leftPanelprfl;
 
@@ -14,7 +14,7 @@ public class LogOutRepository {
 
 	@FindBy(xpath = "//a[contains(text(),'My Profile')]")
 	private WebElement MyProfile;
-	
+
 	public WebElement getMyProfile() {
 		return MyProfile;
 	}

@@ -657,7 +657,7 @@ public class JoinLeagueLogic {
 
     }
 
-    public void SelectTeams_JoineLeague() {
+   /* public void SelectTeams_JoineLeague() {
         int i;
         Teamlist = null;
 
@@ -741,7 +741,7 @@ public class JoinLeagueLogic {
 
         }
     }
-
+*/
     // Join the league of 6 teams only
     public void JoineLeague_Of_6_Teams() throws Exception {
 
@@ -840,7 +840,7 @@ public class JoinLeagueLogic {
     } // fUNCTION close
 
     // Joine the league of 6 teams only
-    public void JoineLeague_Of_6_Teams() throws Exception {
+   /* public void JoineLeague_Of_6_Teams() throws Exception {
 
        // java.util.List<WebElement> Teamlist = null;
         Thread.sleep(2000);
@@ -964,7 +964,7 @@ public class JoinLeagueLogic {
         }
 
     }
-
+*/
     static void SelectPlayerInList2(String size, List<WebElement> PlayerListdemo, WebElement first, WebElement second)
             throws Exception {
 
@@ -1038,7 +1038,7 @@ public class JoinLeagueLogic {
         System.out.print("start captain selection ");
         int c = 0, vc = 1;
         try {
-            List<WebElement> selectCaptainlist = crtTeam.getCaptainTextBox();
+            List<WebElement> selectCaptainlist = crtTeam.getCaptainBox();
             List<WebElement> selectViceCaptainlist = crtTeam.getViceCaptainBox();
 
             /*

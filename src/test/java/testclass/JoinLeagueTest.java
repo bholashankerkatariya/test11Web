@@ -23,12 +23,12 @@ public class JoinLeagueTest {
 	public Object[][] TeamSelection() throws Exception {
 		return CSVDataReader.DDTReader("ddt/TeamSelection.csv");
 	}
-	
+
 	@Parameters({"browsers"})
 	@BeforeTest
 	public void CallBrowser(String name ){
 		browser = new Browser(name);
-		
+
 		lgn = new LoginLogic(browser.driver, browser.Wait);
 		joinleague = new JoinLeagueLogic(browser.driver, browser.Wait);
 	}

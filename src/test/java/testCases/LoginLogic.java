@@ -106,7 +106,7 @@ public class LoginLogic {
 			Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
 			System.out.println("User logged in successfully");
 
-			//close addpopup 
+			//close addpopup
 			act.PopClose(loginRepo);
 		}
 

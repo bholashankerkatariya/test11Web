@@ -112,15 +112,15 @@ public class SignUpObjectRepository {
 
 	/*
 	 * @FindBy(xpath = "//input[@name='a']") private WebElement OTPBoxe1;
-	 * 
+	 *
 	 * @FindBy(xpath = "//input[@name='b']") private WebElement OTPBoxe2;
-	 * 
+	 *
 	 * @FindBy(xpath = "//input[@name='c']") private WebElement OTPBoxe3;
-	 * 
+	 *
 	 * @FindBy(xpath = "//input[@name='d']") private WebElement OTPBoxe4;
-	 * 
+	 *
 	 * @FindBy(xpath = "//input[@name='e']") private WebElement OTPBoxe5;
-	 * 
+	 *
 	 * @FindBy(xpath = "//input[@name='f']") private WebElement OTPBoxe6;
 	 */
 
@@ -144,7 +144,7 @@ public class SignUpObjectRepository {
 	public WebElement getRe_EnterNewPassword() {
 		return Re_EnterNewPassword;
 	}
-	
+
 	@FindBy(xpath = "//button[@class='btn blue_btn']")
 	private WebElement CreatePassword;
 

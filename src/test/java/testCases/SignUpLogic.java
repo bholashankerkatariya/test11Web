@@ -83,7 +83,7 @@ public class SignUpLogic {
 		Wait.until(ExpectedConditions.elementToBeClickable(signupRepo.getLetsPlaybtn())).click();
 		Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getTutorialSkipButton())).click();
 	}
-	
+
 	public void ForgotPassword(String Email, String Password, String ReferralCode, String MobileNumber, String UserName,
 			String Status) {
 		Wait.until(ExpectedConditions.elementToBeClickable(loginRepo.getSigninlnk())).click();
@@ -91,24 +91,24 @@ public class SignUpLogic {
 		Wait.until(ExpectedConditions.elementToBeClickable(signupRepo.getEnterMobileNumber())).clear();
 		Wait.until(ExpectedConditions.elementToBeClickable(signupRepo.getEnterMobileNumber())).sendKeys(MobileNumber);
 		signupRepo.getSendOTPbtn().click();
-		
+
 		ApiCallForOtp obj = new ApiCallForOtp();
 		String otp = obj.GetOtp(MobileNumber);
 
 		Wait.until(ExpectedConditions.elementToBeClickable(signupRepo.getOtpBoxes())).sendKeys(otp);
 
 		Wait.until(ExpectedConditions.elementToBeClickable(signupRepo.getVerifyOTP())).click();
-		
+
 		Wait.until(ExpectedConditions.elementToBeClickable(signupRepo.getEnterNewPassword())).clear();
-		
+
 		Wait.until(ExpectedConditions.elementToBeClickable(signupRepo.getEnterNewPassword())).sendKeys("Arjun@1234");
-		
+
 		Wait.until(ExpectedConditions.elementToBeClickable(signupRepo.getRe_EnterNewPassword())).clear();
-		
+
 		Wait.until(ExpectedConditions.elementToBeClickable(signupRepo.getRe_EnterNewPassword())).sendKeys("Arjun@1234");
-		
+
 		Wait.until(ExpectedConditions.elementToBeClickable(signupRepo.getCreatePassword())).click();
-				
+
 	}
 
 }

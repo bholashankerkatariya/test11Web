@@ -9,9 +9,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ApiCallForOtp {
-	
+
 	public String GetOtp(String mobileNo) {
-		
+
 		try {
 			URL url = new URL("https://n2.myteam11.com/users/sentotpforqa");
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -129,68 +129,68 @@ class Data {
 		return Response;
 	}
 
-	/**
-	 * @param status the status to set
-	 */
-	public void setStatus(boolean status) {
-		Status = status;
-	}
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(boolean status) {
+        Status = status;
+    }
 
-	/**
-	 * @param tokenExpire the tokenExpire to set
-	 */
-	public void setTokenExpire(boolean tokenExpire) {
-		TokenExpire = tokenExpire;
-	}
+    /**
+     * @param tokenExpire the tokenExpire to set
+     */
+    public void setTokenExpire(boolean tokenExpire) {
+        TokenExpire = tokenExpire;
+    }
 
-	/**
-	 * @param message the message to set
-	 */
-	public void setMessage(String message) {
-		Message = message;
-	}
+    /**
+     * @param message the message to set
+     */
+    public void setMessage(String message) {
+        Message = message;
+    }
 
-	/**
-	 * @param notificationKey the notificationKey to set
-	 */
-	public void setNotificationKey(String notificationKey) {
-		NotificationKey = notificationKey;
-	}
+    /**
+     * @param notificationKey the notificationKey to set
+     */
+    public void setNotificationKey(String notificationKey) {
+        NotificationKey = notificationKey;
+    }
 
-	/**
-	 * @param pollKey the pollKey to set
-	 */
-	public void setPollKey(String pollKey) {
-		PollKey = pollKey;
-	}
+    /**
+     * @param pollKey the pollKey to set
+     */
+    public void setPollKey(String pollKey) {
+        PollKey = pollKey;
+    }
 
-	/**
-	 * @param isAutoScrollHeader the isAutoScrollHeader to set
-	 */
-	public void setIsAutoScrollHeader(boolean isAutoScrollHeader) {
-		IsAutoScrollHeader = isAutoScrollHeader;
-	}
+    /**
+     * @param isAutoScrollHeader the isAutoScrollHeader to set
+     */
+    public void setIsAutoScrollHeader(boolean isAutoScrollHeader) {
+        IsAutoScrollHeader = isAutoScrollHeader;
+    }
 
-	/**
-	 * @param maxteam the maxteam to set
-	 */
-	public void setMaxteam(int maxteam) {
-		Maxteam = maxteam;
-	}
+    /**
+     * @param maxteam the maxteam to set
+     */
+    public void setMaxteam(int maxteam) {
+        Maxteam = maxteam;
+    }
 
-	/**
-	 * @param currentDate the currentDate to set
-	 */
-	public void setCurrentDate(int currentDate) {
-		CurrentDate = currentDate;
-	}
+    /**
+     * @param currentDate the currentDate to set
+     */
+    public void setCurrentDate(int currentDate) {
+        CurrentDate = currentDate;
+    }
 
-	/**
-	 * @param response the response to set
-	 */
-	public void setResponse(String response) {
-		Response = response;
-	}
+    /**
+     * @param response the response to set
+     */
+    public void setResponse(String response) {
+        Response = response;
+    }
 
 }
 

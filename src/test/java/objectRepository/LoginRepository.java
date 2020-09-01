@@ -11,7 +11,7 @@ public class LoginRepository {
 
 	@FindBy(xpath = "//input[@type='text']")
 	private WebElement refercodetxt;
-	
+
 	@FindBy(xpath = "//*[@name='emailmob']")
 	private WebElement Usernametxt;
 
@@ -75,22 +75,22 @@ public class LoginRepository {
 	@FindBy(xpath = "//*[@id='passwordNext' and @tabindex='0']")
 	private WebElement Popup_PasswordNextbtn;
 
-	@FindBy(xpath = "//input[@id='email']") 
+	@FindBy(xpath = "//input[@id='email']")
 	private WebElement FacebookEmailTextBox;
 
 	@FindBy(xpath = "//*[@id='pass']")
 	private WebElement FacebookPasswordTextBox;
-	
+
 	@FindBy(xpath = "//*[@id='identifierId' and @type='email']")
 	private WebElement GoogleEmailTextBox;
-	
+
 	@FindBy(xpath = "//a[@class='close_line active']")
 	private WebElement AddCloseButtonList;
-	
+
 	public WebElement getAddCloseButtonList() {
 		return AddCloseButtonList;
 	}
-	
+
 	public WebElement getGoogleEmailTextBox() {
 		return GoogleEmailTextBox;
 	}
@@ -109,10 +109,10 @@ public class LoginRepository {
 
 	@FindBy(xpath = "//*[@id=\"identifierNext\"]")
 	private WebElement GooglePopUpNextButton;
-	
+
 	@FindBy(xpath = "//*[@type=\"password\"]")
 	private WebElement GooglePasswordTextBox;
-	
+
 	@FindBy(xpath = "//*[@id=\"passwordNext\"]")
 	private WebElement GooglePopUpPasswordNextButton;
 

@@ -4,13 +4,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class BeforeLogicRepository {
-	
+
 	@FindBy(xpath = "//a[@class='btn blue_btn']")
 	public WebElement PlayNowbtn;
-	
+
 	@FindBy(xpath = "//a[@id='landing_play_now']")
 	public WebElement download_Android_app;
-	
+
 	@FindBy(xpath = "//a[@id='landing_login']")
 	public WebElement Loginlink;
 
@@ -31,49 +31,49 @@ public class BeforeLogicRepository {
 
 	@FindBy(partialLinkText = "Volleyball")
 	public WebElement Volleyball;
-	
+
 	@FindBy(partialLinkText = "Basketball")
 	public WebElement Basketball;
-	
+
 	@FindBy(xpath = "//p//span[@class='regular'][contains(text(),'Regular')]")
 	public WebElement RegularMode;
-	
+
 	@FindBy(xpath = "//p//span[@class='safe'][contains(text(),'Safe')]")
 	public WebElement SafeMode;
-	
+
 	@FindBy(xpath = "//div[@class='match_listing']")
 	public WebElement MatchList;
-	
+
 	@FindBy(xpath = "//div[@class='match_listing']//div[1]//div[1]//a[1]")
 	public WebElement ThirdMatch;
-	
+
 	@FindBy(xpath = "//*[contains(text(),'My Contests')]")
 	public WebElement MyContests;
-	
+
 	@FindBy(xpath = "//*[contains(text(),'Wallet')]")
 	public WebElement Wallet;
-	
+
 	@FindBy(xpath = "//*[contains(text(),'More')]")
 	public WebElement More;
-	
+
 	@FindBy(xpath = "//footer[@class='add_width_left']")
 	public WebElement footer;
-	
+
 	@FindBy(xpath = "//a[@class='introjs-button introjs-skipbutton']")
 	public WebElement SkipTutorial;
-	
-	
+
+
 	@FindBy(xpath = "//figure[@class='logo']//img")
 	public WebElement MyteamImgLogin;
-	
+
 	public WebElement getMyteamImg() {
 		return MyteamImgLogin;
 	}
-	
+
 	public WebElement getPlayNowbtn() {
 		return PlayNowbtn;
 	}
-	
+
 	public WebElement getDownload_Android_app() {
 		return download_Android_app;
 	}
